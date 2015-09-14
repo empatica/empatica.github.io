@@ -94,16 +94,16 @@
 
 <p>The EmpaLink API requires your developer key in order to make any requests to the API. Call this method with your API key when launching your app, adding the following code to your app delegate source file (usually AppDelegate.m):</p>
 
-<p><code>// AppDelegate.h</code></p>
-<p><code>- (BOOL)application:(UIApplication *)application </code></p>
-<p><code>didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {</code></p>
-<p><code>[EmpaticaAPI authenticateWithAPIKey:@"HERE_GOES_YOUR_API_KEY"</code></p>
-<p><code>andCompletionHandler:^(BOOL success, NSString *description)</code></p>
-<p><code>{</code></p>
-<p><code>NSLog(@"Empatica API authentication successful: %d", success);</code></p>
-<p><code>}];</code></p>
-<p><code>return YES;</code></p>
-<p><code>}</code></p>
+<p><code>// AppDelegate.h</code>
+<code>- (BOOL)application:(UIApplication *)application </code>
+<code>didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {</code>
+<code>[EmpaticaAPI authenticateWithAPIKey:@"HERE_GOES_YOUR_API_KEY"</code>
+<code>andCompletionHandler:^(BOOL success, NSString *description)</code>
+<code>{</code>
+<code>NSLog(@"Empatica API authentication successful: %d", success);</code>
+<code>}];</code>
+<code>return YES;</code>
+<code>}</code></p>
 
 <p>In your app delegate source file, you also need to implement the following methods:</p>
 
