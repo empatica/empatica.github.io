@@ -1,0 +1,419 @@
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset='utf-8'>
+      <meta http-equiv="X-UA-Compatible" content="chrome=1">
+      <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+      <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+      <title>Empatica iOS API for Developers</title>
+    </head>
+
+    <body>
+      <div id="container">
+        <div class="inner">
+
+        <header>
+        <h1>Empatica BLE Server for Windows (Beta)</h1>
+        </header>
+          
+        <section id="main_content">
+
+		<p>This is a **reference guide** for the communication protocol supported by the Empatica TCP Server.</p>
+
+		<p>Empatica TCP server allows to receive **realtime data** from multiple Empatica E4 devices.</p>
+
+		<p>Please note that for each TCP connection it is allowed to connect one Empatica Device at time. To connect to multiple devices, multiple TCP connections are required. The server accepts TCP sockets connections.</p>
+
+		<p>After a succesful connection from a client, the server waits for command messages.</p>
+
+ 		<p>The <a href="#general-message-structure">general message structure</a> is described in the following section, while details on the client commands and server responses are described in the <a href="#commands-responses">commands and data section</a>.</p>
+
+		<p>To get a glance of the communication protocol, visit the <a href="#protocol-example">protocol example section</a>.</p>
+
+
+		<h2>
+  		<a id="general-message-structure" class="anchor" href="#general-message-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>General message structure
+  		</h2>
+
+
+		<p>Messages are ASCII strings terminated with a newline (in Windows '\r\n') character. Some commands have parameters, which are separated by spaces.</p>
+
+		<p>Client requests are in the following format:</p>
+
+		<pre>
+		<code>Client request format</code>
+			<code>&#60;COMMAND&#62; &#60;ARGUMENT_LIST&#62;</code>
+		<code>Example</code>
+			<code>device_subscribe gsr ON</code>
+		</pre>
+
+		<p>Messages from server containing <strong>responses to commands</strong> are in the following format:</p>
+
+		<pre>
+		<code>Server responses</code>
+			<code>R &#60;COMMAND&#62; &#60;ARGUMENT_LIST&#62;</code>
+		<code>Example</code>
+			<code>R device_subscribe acc ON</code>
+		</pre>
+
+		<p>Messages from server containing data from device are in the following format:</p>
+
+		<pre>
+		<code>Stream Data Format</code>
+			<code>&#60;STREAM_TYPE&#62; &#60;TIMESTAMP&#62; &#60;DATA&#62;</code>
+		<code>Example</code>
+			<code>G 123345627891.123 3.129</code>
+		</pre>
+
+		<h2>
+  		<a id="commands-responses" class="anchor" href="#commands-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands and Responses Details
+  		</h2>
+
+  		<h3>
+  		<a id="server-status" class="anchor" href="#server-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server status
+  		</h3>
+
+		<p>The client requires the current status of the server. The server status is <strong>OK</strong> when the server is fully functional and ready to connect to Empatica E4 devices. The server status is <strong>ERR</strong> if something is wrong (often, problems are related to Bluetooth low energy adapter).</p>
+
+		<p>Possible server status:</p>
+
+		<li><strong>OK</strong>: the server is fully functional and ready to connect to Empatica E4 devices.</li>
+		<li><strong>ERR</strong>: something is wrong (often, problems are related to the Bluetooth low energy adapter).</li>
+		<p></p>
+		<pre>
+		<code>Client Request</code>
+			<code>server_status</code>
+		</pre>
+		<pre>
+		<code>Server Response</code>
+			<code>R server_status OK</code>
+			<code>R server_status ERR &#60;reason&#62;</code>
+		<code>Example:</code>
+			<code>R server_status ERR Bluetooth low energy not available on server`</code>
+		</pre>
+<!--
+###List of available devices
+
+The client requires the list of Empatica E4 devices in range and available for connection. The server responds with the number of available devices and a list of devices info.
+
+	Client Request
+		device_list
+
+	Server Response
+		R device_list <NUMBER_OF_DEVICES> | <DEVICE_INFO_1> | <DEVICE_INFO_2>
+	Example
+		R device_list 2 | 9ff167 Empatica_E4 available | 740163 Empatica_E4 available
+
+The format of the device info is the following:
+
+	DEVICE_INFO format
+		<DEVICE_ID> <DEVICE_NAME> <AVAILABILITY>
+	Example
+		9ff167 Empatica E4 available
+
+**DEVICE_ID**
+The device id is unique for every device. It is used by the client during a connect request.
+
+**DEVICE_NAME**
+The device name being used.
+
+**AVAILABILITY**
+Availability parameter is always available. Other values are reserved for future implementation.
+
+### Connect to a Device
+
+1. The client sends a connection request to a specific device.
+2. Each TCP connection is allowed to connect to one Empatica Device at time.
+3. To connect to multiple devices, multiple TCP connections are required.
+
+	Client Request
+		device_connect <DEVICE_ID>
+	Example:
+	device_connect 9ff167`
+
+**DEVICE_ID**
+The device id is returned from the server after a device_list command.
+
+	Server Response
+		R device_connect OK
+		R device_connect ERR <reason>
+	Example:
+		R device_connect ERR The device requested for connection is not available.
+
+### Disconnect from a Device
+
+The client sends a device disconnection request. It will be disconnected from the currently connected device.
+
+	Client Request
+		device_disconnect
+
+	Server Response
+		R device_disconnect OK
+		R device_disconnect ERR <reason>
+	Example:
+		R device_disconnect ERR No connected device.
+
+In case of device disconnection (e.g., the user switch off the device, or the battery runs out) the server sends the following packet
+
+	Device Disconnection
+		X device_disconnect
+
+###Subscribe to Receive Data
+
+To start receiving data from a given stream, the client sends a data subscription request specifying the desired stream.
+
+	Client Request
+		device_subscribe <STREAM> ON
+	Example:
+		device_subscribe gsr ON
+
+	Server Response
+		R device_subscribe <STREAM> ON
+		R device_subscribe <STREAM> ERR <REASON>
+	Example:
+		R device_subscribe gsr OK
+
+**STREAM**
+
+The streams available are the following:
+
+- acc - 3-axis acceleration
+- bvp - Blood Volume Pulse
+- gsr - Galvanic Skin Response
+- ibi - Interbeat Interval
+- tmp - Skin Temperature
+- bat - Device Battery
+
+### Unsubscribe from Receive Data
+
+To stop receiving data from a given stream, the client sends a data unsubscription request specifying the desired stream.
+
+	Client Request
+		device_subscribe <STREAM> OFF
+	Example:
+		device_subscribe gsr OFF`
+
+	Server Response
+		R device_subscribe <STREAM> OFF
+		R device_subscribe <STREAM> ERR <REASON>
+	Example:
+		R device_subscribe gsr OFF`
+
+**STREAM**
+
+The streams available are the following:
+
+- acc - 3-axis acceleration
+- bvp - Blood Volume Pulse
+- gsr - Galvanic Skin Response
+- ibi - Interbeat Interval
+- tmp - Skin Temperature
+- bat - Device Battery
+- tag - Tag taken from the device (by pressing the button)
+
+### Suspend data streaming
+
+To temporarily suspend the data streaming (without disconnecting or switching off the device), the client sends a pause request
+
+	Client Request
+		pause ON
+
+	Server Response
+		R pause ON
+		R pause ERR <REASON>
+	Example:
+		R pause ERR You are not connected to any device`
+
+### Resume data streaming
+
+To resume the data streaming, the client sends a resume request
+
+	Client Request
+		pause OFF
+
+	Server Response
+		R pause OFF
+		R pause ERR <REASON>
+	Example:
+		R pause ERR You are not connected to any device`
+
+## <a name="data-streaming"></a>Data Streaming Packets
+After a succesful connection and stream subscription to an Empatica Device, the client starts receiving sensor's data from the server.
+
+	Stream Data Format
+		<STREAM_TYPE> <TIMESTAMP> <DATA>
+	Example
+		G 123345627891.123 3.129
+
+**STREAM_TYPE**
+
+The streams available are the following:
+
+- E4_Acc - 3-axis acceleration
+- E4_Bvp - Blood Volume Pulse
+- E4_Gsr - Galvanic Skin Response
+- E4_Temp - Skin Temperature
+- E4_Ibi - Interbeat Interval
+- E4_Battery - Device Battery
+- E4_Tag - Device Battery
+
+**TIMESTAMP**
+
+The timestamp for the sample in seconds defined as time interval between the sample received and the reference date, 1 January 1970, GMT.
+
+**DATA**
+
+Each stream type has different data format as described below:
+
+**Acceleration data**
+
+- The acceleration value for x axis. The x axes is defined by the vector whose starting point is set to the center of the device and whose direction points towards the USB slot.
+- The acceleration value for y axis. The y axes is defined by the vector whose starting point is set to the center of the device and whose direction points towards the shorter strap.
+- The acceleration value for z axis. The x axes is defined by the vector whose starting point is set to the center of the device and whose direction points towards the bottom of the device.
+
+	Acceleration data
+		E4_Acc 123345627891.123 51 -2 -10
+
+**Blood Volume Pulse data**
+
+   The value of the BVP sample. The value is derived from the light absorbance of the arterial blood. The raw signal is filtered to remove movement artifacts.
+
+	Blood Volume Pulse data
+		E4_Bvp 123345627891.123 31.128
+
+**Galvanic Skin Response data**
+
+   The value of the GSR sample. The value is expressed in microsiemens.
+
+	Galvanic Skin Response data
+		E4_Gsr 123345627891.123 3.129`
+
+**Temperature data**
+
+   The value of the temperature sample in Celsius degrees. The value is derived from the optical temperature sensor placed on the wrist.
+
+	Temperature data
+		E4_Temperature 123345627891.123 35.82`
+
+**Interbeat Interval data**
+
+   The value of the IBI sample. The value is the distance from the previous detected heartbeat in seconds.
+
+	Interbeat Interval data
+		E4_Ibi 123345627891.123 0.822
+
+**Battery level data**
+
+   The battery level of the device. Values: [0.0 - 1.0]
+
+**Battery level data**
+
+	E4_Battery 123345627891.123 0.2
+
+**Tag data**
+   The tags taken from the device
+
+**Battery level data**
+
+	E4_Tag 123345627891.123
+
+## <a name="protocol-example"></a>Protocol Example
+
+Please find below  an example of messages exchange between client and server during a brief acquisition session.
+
+	[OPEN TCP CONNECTION]
+	==> server_status
+	<== R server_status OK
+
+	==> device_list
+	<== R device_list 2 | 9ff167 Empatica E4 available | 7a3166 Empatica E4 available
+
+	==> device_connect ffffff
+	<== R device_connect ERR the requested device is not available
+
+	==> device_connect 9ff167
+	<== R device_connect OK
+
+	==> device_subscribe bvp ON
+	<== R device_subscribe bvp OK
+
+	<== B 123345627891.123 3.212
+	<== B 123345627891.327 10.423
+	<== B 123345627891.472 12.665
+
+	==> device_disconnect
+	<== R device_disconnect OK
+	[EOF]
+
+## Using Empatica BLE Server for Windows (Beta)
+NOTE: this part of the documentation is still under development
+
+###Requirements
+
+- Windows PC running Windows 7 or Windows 8 with Visual C++ Redistributable Package installed (download from [here](http://www.microsoft.com/en-us/download/details.aspx?id=40784))
+- The app is currently working only with [Bluegiga Bluetooth Smart Dongle](https://www.bluegiga.com/en-US/products/bled112-bluetooth-smart-dongle/), Driver/Installation guide [here](https://www.bluegiga.com/en-US/products/bled112-bluetooth-smart-dongle/#login-modal
+)
+- Empatica E4 Sensor with firmware build 0.0.1.505+ installed (If you've bought your E4 after May 2015 the firmware should be already updated)
+- Empatica E4’s must be registered to the API key owner to be accessible via the server application
+
+###Installation
+
+Download the latest release of the Empatica BLE Server for Windows (Beta) from [here](http://get.empatica.com/win/EmpaticaBLEServer.html)
+
+###Configuration
+
+The first time you start the server, you will see the settings panel that allows you to set:
+
+- your Empatica API Key (you can find yours [here](https://www.empatica.com/connect/developer.php), if you don't have one check this [support article](https://www.empatica.com/docs/support.empatica.com/hc/en-us/articles/203296395))
+- the listening IP address of the server (is the address where the Empatica BLE Server will listen towhere you have to connect to send commands and receive data, e.g. 127.0.0.1)
+- the listening port of the server
+
+After configuration set click the "Save" button.
+
+###Using the server
+
+You will see the default view of the server, click the "Start" button.
+
+If the dongle is not connected (or your PC can't communicate with it, i.e. because you didn't install the dongle's drivers), the discovery won't start and the message "Dongle not connected" is displayed at the bottom.
+
+If the dongle was not connected, plug it to your PC and press the "Refresh" button placed in the bottom left corner of the app.
+
+If the dongle is connected, the server will start:
+
+1. Discovery and connection to the E4 device within Bluetooth range and will start listening to commands on the address and port specified in the settings panel.
+2. You can see the label under the button that tells that the app is discovering for E4.
+3. You can now switch on your E4 and the led will start to blink green.
+
+**When the connection is established the led will become light blue and then blue, meaning that the connection was completed.**
+
+After a while (around 40 seconds), the led will be switched off in order to save battery.
+
+When any device is connected, the device ID and the list of the current TCP connections are displayed.
+
+When you want to stop streaming from a device, simply switch off your E4 and it will be disconnected from the app.
+
+If you want to connect another E4 device, wait when the previous E4 is connected, then press the "Discover other E4 devices" button, the app will start to discover other devices.
+
+Make sure to keep the devices not too close because the radios might saturate when the antennas are too close, resulting in lack of communication over-the-air
+
+###Troubleshooting
+
+**When I click "Save" in settings panel, I see the "Invalid Api key" message**
+
+Please try to insert again your API Key (you can find your API key [here](https://www.empatica.com/connect/developer.php)). If you have still the issue, please contact our [support](support@empatica.com)
+
+**When I click "Start", I can't get my E4 connected**
+
+Try to follow these steps in order to get your E4 connected:
+
+- Launch the app
+- Check that the dongle is connected (you should see a "Dongle connected" label) at the bottom of the app's window
+- Click the "Start" button
+- Switch on your E4
+
+If the app can't connect to your E4 before the led becomes red (and memory mode starts) please contact our [support](support@empatica.com) writing us your Api key and the serial number of the device you're using (placed close to sensor's led) -->
