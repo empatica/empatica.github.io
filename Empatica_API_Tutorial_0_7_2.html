@@ -18,17 +18,28 @@
         <div class="inner">
 
           <header>
-            <h1>Empatica API Tutorial (0.7.2)</h1>
+            <h1>Empatica API Tutorial</h1>
           </header>
 
           <section id="main_content">
             <h1>
   <a id="empatica-ios-api" class="anchor" href="#empatica-ios-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Empatica iOS API for Developers</h1>
 
-  <p>The steps described below assume you are adding the Empatica API to an existing project, or a new one you created from scratch.</p>
+  <p></p>
+  <p>The steps described below assume you are adding the Empatica API to an existing project, or you can also create a new project based on the available example projects.</p>
 
-  <p>You can also download an example Xcode project, already configured for use with the Empatica API, and start using your Empatica E4 in a matter of minutes. You are just required to use your Empatica API key in the AppDelegate.m source file and remember to delete the line starting with "#error"</p>
+  <p>Download our Xcode example projects, already configured for use with the Empatica API, and start using your Empatica E4 in a matter of minutes:</p> 
 
+  <li>Download the <a href="EmpaticaAPI_sampleProject-0.7.3_singleDevice.zip">single device</a> example Xcode project.</li>
+  <li>Download the <a href="EmpaticaAPI_sampleProject-0.7.3_multipleDevices.zip">multiple devices</a> example Xcode project.</li>
+
+  <p></p>
+  <p>You are just required to use your Empatica API key in the AppDelegate.m source file and remember to delete the line starting with "#error"</p>
+
+  <p></p>
+  <h2>
+  <a id="own-project" class="anchor" href="#own-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your own project
+  </h2>
   <h2>
   <a id="step1-setup" class="anchor" href="#step1-setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 1: Setup
   </h2>
@@ -37,22 +48,22 @@
   <a id="add-empalink-api" class="anchor" href="#add-empalink-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add Empalink API</h3>
 
   <ol>
-  <li><p>Download the EmpaLink Framework for iOS from your Developer Area in Empatica Connect</p></li>
+  <li><p>Download the EmpaLink Framework for iOS from your <a href="https://www.empatica.com/connect/developer.php">Developer Area in Empatica Connect</a></p></li>
   <li><p>Open your existing project</p></li>
   <li><p>Drag the EmpaLink Framework into your project's "Frameworks" folder.</p></li>
   </ol>
 
-  <p>IMAGE</p>
+  <p><img src="images/tut1_0.7.png"></p>
 
-  <p><b>**Note:**</b> Make sure the "Copy items into destination group's folder (if needed)" checkbox is checked.
+  <p><strong>Note:</strong> Make sure the "Copy items into destination group's folder (if needed)" checkbox is checked.
   </p>
 
-  <p>IMAGE</p>
+  <p><img src="images/tut2_0.7.png"></p>
 
   <h3>
   <a id="add-background-comm-support" class="anchor" href="#add-background-comm-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add background communication support</h3>
 
-  <p>EmpaLink can communicates with the Empatica device even while the app is in the background. Your app requires the authorization to run CoreBluetooth service in the background to work.</p>
+  <p>EmpaLink communicates with the Empatica device even while the app is in the background. Your app requires the authorization to run CoreBluetooth service in the background to work.</p>
 
   <p>In order to enable background communications for app running in the background, we need to check the right "Background Modes" option in the iOS Target Properties.</p>
 
@@ -62,7 +73,7 @@
   <li><p>Check "Uses Bluetooth LE accessories.</p></li>
   </ol>
 
-  <p>IMAGE</p>
+  <p><img src="images/tut3_0.7.png"></p>
 
   <h2>
   <a id="step2-initialize-api" class="anchor" href="#step2-initialize-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 2: Initialize the API</h2>
