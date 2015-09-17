@@ -38,7 +38,7 @@
 
   <p></p>
   <h2>
-  <a id="own-project" class="anchor" href="#own-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your own project
+  <a id="own-project" class="anchor" href="#own-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add to your own project
   </h2>
   <h2>
   <a id="step1-setup" class="anchor" href="#step1-setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 1: Setup
@@ -48,8 +48,8 @@
   <a id="add-empalink-api" class="anchor" href="#add-empalink-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add Empalink API</h3>
 
   <ol>
-  <li><p>Download the EmpaLink Framework for iOS from your <a href="https://www.empatica.com/connect/developer.php">Developer Area in Empatica Connect</a></p></li>
-  <li><p>Open your existing project</p></li>
+  <li><p>Download the EmpaLink Framework for iOS from your <a href="https://www.empatica.com/connect/developer.php">Developer Area in Empatica Connect</a>.</p></li>
+  <li><p>Open your existing project.</p></li>
   <li><p>Drag the EmpaLink Framework into your project's "Frameworks" folder.</p></li>
   </ol>
 
@@ -65,12 +65,12 @@
 
   <p>EmpaLink communicates with the Empatica device even while the app is in the background. Your app requires the authorization to run CoreBluetooth service in the background to work.</p>
 
-  <p>In order to enable background communications for app running in the background, we need to check the right "Background Modes" option in the iOS Target Properties.</p>
+  <p>In order to enable background communications, you need to check the right "Background Modes" option in the iOS Target Properties.</p>
 
   <ol>
-  <li><p>In the Project Target, select "Capabilities" tab.</p></li>
+  <li><p>In the Project Target, select the "Capabilities" tab.</p></li>
   <li><p>Enable "Background Modes" by clicking on the switch.</p></li>
-  <li><p>Check "Uses Bluetooth LE accessories.</p></li>
+  <li><p>Check "Uses Bluetooth LE accessories".</p></li>
   </ol>
 
   <p><img src="images/tut3_0.7.png"></p>
@@ -78,138 +78,139 @@
   <h2>
   <a id="step2-initialize-api" class="anchor" href="#step2-initialize-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 2: Initialize the API</h2>
 
-  <p>The final steps to set up the API require adding a few lines of code to your main app delegate. This is the class where you include iOS required methods like <code>applicationDidFinishLaunching</code>.</p>
+  <p>The final steps to set up the API require adding a few lines of code to your main app delegate. Being the class where you include iOS required methods like <code>applicationDidFinishLaunching</code>.</p>
 
   <h3>
   <a id="import-empatica-api" class="anchor" href="#import-empatica-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Import the Empatica API header</h3>
 
-  <p>At the top of your app delegate source file (and anywhere you invoke the DeviceManager class), you’ll need to include the correct EmpaLink header.</p>
+  <p>At the top of your app delegate source file - and anywhere you invoke the <code>DeviceManager</code> class, you’ll need to include the correct EmpaLink header.</p>
 
   <p>If you downloaded the full version, simply add this line:</p>
 
   <pre><code> // AppDelegate.h</code>
-  <code>#import &#60;EmpaLink-ios-0.7-full/>EmpaticaAPI-0.7.h&#62;</code></pre>
+  <code>#import &#60;EmpaLink-ios-0.7-full/EmpaticaAPI-0.7.h&#62;</code></pre>
 
   <p>Otherwise, add the following line:</p>
 
   <pre><code> // AppDelegate.h</code>
-  <code>#import &#60;EmpaLink-ios-0.7-full/>EmpaticaAPI-0.7.h&#62;</code></pre>
+  <code>#import &#60;EmpaLink-ios-0.7-full/EmpaticaAPI-0.7.h&#62;</code></pre>
 
   <h3>
   <a id="set-empatica-api-key" class="anchor" href="#set-empatica-api-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set Your Empatica API Key</h3>
 
-  <p>The EmpaLink API requires your developer key in order to make any requests to the API. Call this method with your API key when launching your app, adding the following code to your app delegate source file (usually AppDelegate.m):</p>
+  <p>The EmpaLink API requires your developer key in order to make any requests to the API. Call this method with your API key when launching your app, adding the following code to your app delegate source file usually <code>AppDelegate.m</code>:</p>
 
-  <pre><code>// AppDelegate.h</code>
-  <code>- (BOOL)application:(UIApplication *)application </code>
-  <code>didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {</code>
-  <code>[EmpaticaAPI authenticateWithAPIKey:@"HERE_GOES_YOUR_API_KEY"</code>
-  <code>andCompletionHandler:^(BOOL success, NSString *description)</code>
-  <code>{</code>
-  <code>NSLog(@"Empatica API authentication successful: %d", success);</code>
-  <code>}];</code>
-  <code>return YES;</code>
-  <code>}</code></pre>
+  <pre>// AppDelegate.h
+  - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+      [EmpaticaAPI authenticateWithAPIKey:@"HERE_GOES_YOUR_API_KEY"
+        andCompletionHandler:^(BOOL success, NSString *description)
+  {
+    NSLog(@"Empatica API authentication successful: %d", success);
+  }];
+    return YES;
+  }</pre>
 
   <p>In your app delegate source file, you also need to implement the following methods:</p>
 
-  <pre><code>// AppDelegate.h</code>
-  <code>- (void)applicationDidEnterBackground:(UIApplication *)application {</code>
-  <code>[EmpaticaAPI prepareForBackground];</code>
-  <code>}</code></pre>
+  <pre>// AppDelegate.h
+  - (void)applicationDidEnterBackground:(UIApplication *)application {
+    [EmpaticaAPI prepareForBackground];
+  }</pre>
 
-  <pre><code>- (void)applicationDidBecomeActive:(UIApplication *)application {</code>
-  <code>[EmpaticaAPI prepareForResume];</code>
-  <code>}</code></pre>
+  <pre>- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [EmpaticaAPI prepareForResume];
+  }</pre>
 
   <h3>
   <a id="step3-empalink-api" class="anchor" href="#step3-empalink-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 3: Use the EmpaLink API</h3>
 
-  <p>Now you are ready to start using the EmpaLink API in your project. If your app will connect to one E4 device at time, read the Single Device section below. If your app needs to connect to multiple E4 devices at the same time, please jump to the Multiple Devices section.</p>
+  <p>Now you are ready to start using the EmpaLink API in your project. If your app will connect to one E4 device at time, read the <a href="#single-device">Single device</a> section below. If your app needs to connect to multiple E4 devices at the same time, please jump to the <a href="#multiple-devices">Multiple Devices</a> section.</p>
 
   <h4>
   <a id="single-device" class="anchor" href="#single-device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Single device</h4>
 
-  <p>Your main view controller (for example, in the default single view app, ViewController.m) must implement the EmpaticaDelegate and EmpaticaDeviceDelegate protocols.</p>
+  <p>Your main view controller - for example, in the default single view app, <code>ViewController.m</code> must implement the <code>EmpaticaDelegate</code> and <code>EmpaticaDeviceDelegate</code> protocols.</p>
 
-  <pre><code>// ViewController.m</code>
-  <code>@interface ViewController () &#60;EmpaticaDelegate, EmpaticaDeviceDelegate&#62;</code></pre>
+  <pre>// ViewController.m
+  @interface ViewController () &#60;EmpaticaDelegate, EmpaticaDeviceDelegate&#62;</pre>
 
   <p>Ask the API to scan for devices, e.g., when you press a button</p>
 
-  <pre><code>// ViewController.m</code>
-  <code>- (IBAction)ScanForDevicesButtonPressed:(id)sender {</code>
-  <code>[EmpaticaAPI discoverDevicesWithDelegate:self];</code>
-  <code>}</code></pre>
+  <pre>// ViewController.m
+  - (IBAction)ScanForDevicesButtonPressed:(id)sender {
+   [EmpaticaAPI discoverDevicesWithDelegate:self];
+  }</pre>
 
   <p>Connect to a device</p>
 
-  <pre><code>// ViewController.m</code>
-  <code>- (void)didDiscoverDevices:(NSArray *)devices {</code>
-  <code>if (devices.count > 0) {</code>
-  <code>  // Connecting to first available device</code>
-  <code>  EmpaticaDeviceManager *firstDevice = [devices objectAtIndex:0];</code>
-  <code>  [firstDevice connectWithDeviceDelegate:self];</code>
-  <code>} else {</code>
-          <code>NSLog(@"No device found in range");</code>
-    <code>}</code>
-  <code>}</code></pre>
+  <pre>// ViewController.m
+  - (void)didDiscoverDevices:(NSArray *)devices {
+  if (devices.count > 0) {
+    // Connecting to first available device
+    EmpaticaDeviceManager *firstDevice = [devices objectAtIndex:0];
+    [firstDevice connectWithDeviceDelegate:self];
+  } else {
+          NSLog(@"No device found in range");
+    }
+  }</pre>
 
   <p>Start receiving samples by implementing EmpaticaDeviceDelegate methods</p>
 
-  <pre><code>// ViewController.m</code>
-    <code>- (void)didReceiveGSR:(float)gsr withTimestamp:(double)timestamp fromDevice:(EmpaticaDeviceManager *)device {</code>
-    <code>// Do something with the received sample</code>
-    <code>NSLog(@"GSR value received: %f at timestamp: %lf", gsr, timestamp);</code>
-    <code>}</code></pre>
+  <pre>// ViewController.m
+    - (void)didReceiveGSR:(float)gsr withTimestamp:(double)timestamp fromDevice:(EmpaticaDeviceManager *)device {
+    // Do something with the received sample
+    NSLog(@"GSR value received: %f at timestamp: %lf", gsr, timestamp);
+    }</pre>
 
   <h3>
   <a id="multiple-devices" class="anchor" href="#multiple-devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Multiple devices</h3>
 
   <p>Your main view controller (for example, in the default single view app, ViewController.m) must implement EmpaticaDelegate protocol.</p>
 
-  <pre><code>// ViewController.m</code>
-  <code>@interface ViewController () &#60;EmpaticaDelegate&#62;</code></pre>
+  <pre>// ViewController.m
+  @interface ViewController () &#60;EmpaticaDelegate&#62;</pre>
 
   <p>Ask the API to scan for devices</p>
-  <pre><code>- (IBAction)ScanForDevicesButtonPressed:(id)sender {</code>
-  <code>[EmpaticaAPI discoverDevicesWithDelegate:self];</code>
-  <code>}</code></pre>
+  <pre>- (IBAction)ScanForDevicesButtonPressed:(id)sender {
+    [EmpaticaAPI discoverDevicesWithDelegate:self];
+  }</pre>
 
   <p>Create the E4 device manager</p>
 
-  <p>To allow your app to handle multiple devices, you will need to create a class (e.g., E4DeviceManager) implementing EmpaticaDeviceDelegate protocol. Each connected device will have, as a delegate, a different instance of E4DeviceManager class.</p>
+  <p>To allow your app to handle multiple devices, you will need to create a class (e.g., <code>E4DeviceManager</code>) implementing <code>EmpaticaDeviceDelegate</code> protocol. Each connected device will have, as a delegate, a different instance of <code>E4DeviceManager</code> class.</p>
 
-  <pre><code>// E4DeviceManager.m</code>
-  <code>@interface E4DeviceManager : NSObject <EmpaticaDeviceDelegate></code></pre>
+  <pre>// E4DeviceManager.m
+  @interface E4DeviceManager : NSObject <EmpaticaDeviceDelegate></pre>
 
   <p>Connect to all discovered devices</p>
 
-  <pre><code>// ViewController.m</code>
-    <code>@property (nonatomic, strong) NSMutableArray *E4DeviceManagers;</code>
-      <code>// ViewController.m</code>
-    <code>- (void)didDiscoverDevices:(NSArray *)devices {</code>
-      <code>if (devices.count > 0) {</code>
-          <code>for (EmpaticaDeviceManager *device in devices) {</code>
-             <code>NSLog(@"Device %@ Discovered", device.name);</code>
-              <code>// Create a DeviceManager for each device</code>
-              <code>E4DeviceManager *manager = [[E4DeviceManager alloc] init];</code>
-              <code>[_E4DeviceManagers addObject:manager];</code>
-              <code>// Connect to E4 device</code>
-              <code>[device connectWithDeviceDelegate:manager];</code>
-          <code>}</code>
-      <code>} else {</code>
-          <code>NSLog(@"No devices found in range");</code>
-        <code>}</code>
-    <code>}</code></pre>
+  <pre>// ViewController.m
+    @property (nonatomic, strong) NSMutableArray *E4DeviceManagers;
+      // ViewController.m
+    - (void)didDiscoverDevices:(NSArray *)devices {
+      if (devices.count > 0) {
+          for (EmpaticaDeviceManager *device in devices) {
+             NSLog(@"Device %@ Discovered", device.name);
 
-    <p>Start receiving samples by implementing EmpaticaDeviceDelegate methods in E4DeviceManager.</p>
+              // Create a DeviceManager for each device
+              E4DeviceManager *manager = [[E4DeviceManager alloc] init];
+              [_E4DeviceManagers addObject:manager];
 
-   <pre><code> // E4DeviceManager.m</code>
-    <code>- (void)didReceiveGSR:(float)gsr withTimestamp:(double)timestamp fromDevice:(EmpaticaDeviceManager *)device {</code>
-      <code>// Do something with the received GSR</code>
-      <code>NSLog(@"[%@] GSR received: %f at timestamp %f", device.name, gsr, timestamp);</code>
-    <code>}</code></pre>
+              // Connect to E4 device
+              [device connectWithDeviceDelegate:manager];
+          }
+      } else {
+          NSLog(@"No devices found in range");
+        }
+    }</pre>
+
+    <p>Start receiving samples by implementing <code>EmpaticaDeviceDelegate</code> methods in <code>E4DeviceManager</code>.</p>
+
+   <pre> // E4DeviceManager.m
+    - (void)didReceiveGSR:(float)gsr withTimestamp:(double)timestamp fromDevice:(EmpaticaDeviceManager *)device {
+      // Do something with the received GSR
+      NSLog(@"[%@] GSR received: %f at timestamp %f", device.name, gsr, timestamp);
+    }</pre>
     </section>
 
           <footer>
