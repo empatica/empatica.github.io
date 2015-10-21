@@ -54,9 +54,48 @@
 
 <p><strong>Empatica SDK</strong></p>
 
-<p>For development in Java on your prefered development environment, EmpaLink for Android offers developers access to real-time data-streams from within your Android application.</p> 
+<p>For development in Java on your prefered development environment, EmpaLink for Android offers developers access to real-time data-streams from within your Android application. E4 data can be retrieved using the following methods:</p>
 
-<p>Note that button press/event mark timing is not yet available on the Android platform. You can find additional info, including a complete tutorial, on the latest SDK version for Android <a href="Android_API_Tutorial_2_0.html">here</a></p>
+<table style="width:100%">
+  <tr>
+    <th>Modifier and Type</td>
+    <th>Method</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>void</td>
+    <td><strong>didReceiveAcceleration</strong>(int x, int y, int z, double timestamp)</td>
+    <td>This method is invoked when a new acceleration value is available</td>
+  </tr>
+  <tr>
+    <td>void</td>
+    <td><strong>didReceiveBatteryLevel</strong>(float level, double timestamp)</td>
+    <td>This method is invoked when a new battery level value is available</td>
+  </tr>
+  <tr>
+    <td>void</td>
+    <td><strong>didReceiveBVP</strong>(float bvp, double timestamp)</td>
+    <td>This method is invoked when a new BVP value is available</td>
+  </tr>
+  <tr>
+    <td>void</td>
+    <td><strong>didReceiveGSR(</strong>(float gsr, double timestamp)</td>
+    <td>This method is invoked when a new GSR value is available</td>
+  </tr>
+  <tr>
+    <td>void</td>
+    <td><strong>didReceiveIBI(</strong>(float ibi, double timestamp)</td>
+    <td>This method is invoked when a new interbeat interval (IBI) value is available</td>
+  </tr>
+  <tr>
+    <td>void</td>
+    <td><strong>didReceiveTemperature(</strong>(float ibi, double timestamp)</td>
+    <td>This method is invoked when a new interbeat interval (IBI) value is available</td>
+  </tr>
+</table>
+
+<p></p>
+<p>Note that button press/event mark timing is not yet available on the Android platform.</p> <p>You can find additional info, including a complete tutorial, on the latest SDK version for Android <a href="Android_API_Tutorial_2_0.html">here</a></p>
 
 <p><strong>Sample project</strong></p>
 <p>A sample console app that demonstrates how to establish a streaming connection to the Empatica E4 can be found on the <a href="https://github.com/empatica/empalink-sample-project-android">Empatica Github page</a>. For simplicity the project demonstrates EDA streaming for ten-seconds - all other arguments are commented out.</p>
