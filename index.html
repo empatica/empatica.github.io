@@ -15,12 +15,25 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <title>Empatica for Developers by empatica</title>
-    <meta name="description" content="Empatica develops the best wearable devices with medical quality sensing to improve people's lives.">
+    <meta name="description" content="Empatica research products are currently compatible with three programming interfaces: Android and iOS SDKs and a Windows based Bluetooth Low Energy (BLE) Server.">
 
     <!-- Favicon -->
     <link rel="icon" href="//static-content1.empatica.com/YaJqf/img/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="//static-content1.empatica.com/YaJqf/img/favicon.png">
     <link href="//static-content1.empatica.com/YaJqf/img/favicon.png" rel="shortcut icon" type="image/x-icon">
+
+		<!-- Google Analytics -->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-25632719-2', 'auto');
+			ga('require', 'linkid', 'linkid.js');
+			ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+		</script>
   </head>
 
   <body>
@@ -41,7 +54,7 @@
         <section id="main_content">
           <h2><a id="empatica-developers-page" class="anchor" href="#empatica-developers-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Empatica Programming Interfaces</h2>
 
-<p>Empatica research products are currently compatible with three programming interfaces: <a href="#android">Android</a> and <a href="#ios">iOS SDKs</a> and a <a href="#windows">Windows based Bluetooth Low Energy (BLE) Server</a>. All three of these solutions are designed to allow for real-time time connections to the E4’s data stream.</p>
+<p>Empatica research products are currently compatible with three programming interfaces: <a href="#android">Android</a> and <a href="#ios">iOS</a> SDKs and a <a href="#windows">Windows based Bluetooth Low Energy (BLE) Server</a>. All three of these solutions are designed to allow for real-time time connections to the E4’s data stream.</p>
 
 <p>In order to build your own applications using the Empatica API, you need an API Key and the SDK(s) for your platform(s) of choice. The key is used to authenticate your applications for accounting purposes. You can read the guide: <a href="https://support.empatica.com/hc/en-us/articles/206397545-Develop-your-own-app" title="Develop your own app">Develop your own app</a>.</p>
 
@@ -53,9 +66,9 @@
 
 <h3><a id="ios" class="anchor" href="#ios" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS SDK</h3>
 
-<p>You can find info on how to develop your mobile application using the <a href="ios-sdk-tutorial-072.html">Empatica SDK for iOS</a>. Sample projects are provided that demonstrate <a href="http://empatica.github.io/EmpaticaAPI_sampleProject-0.7.3_singleDevice.zip">single</a> and <a href="http://empatica.github.io/EmpaticaAPI_sampleProject-0.7.3_multipleDevices.zip">multiple</a> Empatica E4 wristbands connections from your iOS device.</p>
+<p>You can find info on how to develop your mobile application using the <a href="ios-sdk-tutorial-072.html">Empatica SDK for iOS tutorial</a>. Sample projects are provided that demonstrate <a href="http://empatica.github.io/empatica-ios-sdk-sample-project-0.7.3-single-device.zip">single</a> and <a href="http://empatica.github.io/empatica-ios-sdk-sample-project-0.7.3-multiple-devices.zip">multiple</a> Empatica E4 wristbands connections from your iOS device.</p>
 
-<p>Also check our <a href="Empatica_API_Reference_0_7.html">API reference</a>.</p>
+<p>Also check our <a href="ios-sdk-api-reference-07.html">API reference</a>.</p>
 
 <h3><a id="android" class="anchor" href="#android" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android SDK</h3>
 
@@ -100,10 +113,10 @@
 </table>
 
 <p></p>
-<p>Note that button press/event mark timing is not yet available on the Android platform.</p> <p>You can find additional info, including a complete tutorial, on the <a href="android-sdk-tutorial-20.html">latest SDK version for Android</a>.</p>
+<p>Note that button press/event mark timing is not yet available on the Android platform.</p> <p>You can find additional info, including a complete tutorial, on the <a href="android-sdk-tutorial-20.html">Empatica SDK for Android tutorial</a>.</p>
 
 <h4>Sample project</h4>
-<p>A sample console app that demonstrates how to establish a streaming connection to the E4 wristband can be found on the <a href="https://github.com/empatica/empalink-sample-project-android">Empalink Sample Project for Android</a> GitHub project. For simplicity the project demonstrates EDA streaming for ten-seconds - all other arguments are commented out.</p>
+<p>A sample console app that demonstrates how to establish a streaming connection to the E4 wristband can be found on the <a href="https://github.com/empatica/empalink-sample-project-android">Empalink Sample Project for Android GitHub project</a>. For simplicity the project demonstrates EDA streaming for ten-seconds - all other arguments are commented out.</p>
 
 <h2><a id="streaming-servers" class="anchor" href="#streaming-servers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Streaming servers</h2>
 
@@ -113,13 +126,13 @@
 
 <h4><a id="ble-client" class="anchor" href="#ble-client" aria-hidden="true"><span class="octicon octicon-link"></span></a>BLE client</h4>
 
-<p>The Empatica BLE Client application, developed in C#, is an demonstration console that works in conjunction with the BLE Server in the Windows platform. Instructions and client source-code available at: <a href="https://github.com/empatica/ble-server-client-windows">Empatica BLE client</a>.</p>
+<p>The Empatica BLE Client application, developed in C#, is an demonstration console that works in conjunction with the BLE Server in the Windows platform. Instructions and client source-code available at: <a href="https://github.com/empatica/ble-server-client-windows">Empatica BLE client GitHub project</a>.</p>
 
 <h4>
 <a id="ble-server" class="anchor" href="#ble-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>BLE server
 </h4>
 
-<p>The Empatica BLE Server is a Windows application that can connect to multiple Empatica E4 devices using Bluetooth and stream data to local endpoint using multiple socket connections. Instructions about the Empatica BLE server are available at: <a href="windows-ble-server.html">Empatica BLE server</a>.</p>
+<p>The Empatica BLE Server is a Windows application that can connect to multiple Empatica E4 devices using Bluetooth and stream data to local endpoint using multiple socket connections. Instructions about the Empatica BLE server are available at <a href="windows-ble-server.html">Empatica BLE server documentation</a>.</p>
 
 <p></p>
 <h2>
@@ -128,13 +141,9 @@
           <p>Having trouble with Empatica developer's software? <a href="support@empatica.com">Contact support</a> and we’ll help you sort it out.</p>
 
         </section>
-
         <footer>
-          <p>Empatica</p>
-        </footer>
-
-
-      </div>
+          <p>Having trouble with Empatica developer's software? <a href="mailto:support@empatica.com">Contact support</a> and we’ll help you sort it out.</p>
+        </footer>      </div>
     </div>
   </body>
 </html>
