@@ -3,14 +3,14 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Empatica iOS SDK API Reference</title>
+    <title>E4link iOS SDK API Reference</title>
     <meta name="description" content="Develop your mobile application using the Empatica SDK for iOS.">
 
     <!-- Favicon -->
@@ -37,21 +37,22 @@
     <div id="container">
       <div class="inner">
       <header>
-						<p><a href="/">< back to Empatica for Developers</a></p>
-		        <h1>Empatica iOS SDK API Reference</h1>
+						<p><a href="/">< Back to E4 for Developers</a></p>
+            <h1>E4link iOS SDK</h1>
+            <h2>API Reference</h2>
 	    </header>
 
 	<section id="main_content">
-	<p>EmpaLink is a library that allows to:</p>
+	<p>E4link is a library that allows to:</p>
 
 	<ul>
-	<li>Connect to and manage one or more Empatica E3 devices via Bluetooth Low Energy (BLE)</li>
+	<li>Connect to and manage one or more Empatica E4 wristband devices via Bluetooth Low Energy (BLE)</li>
 	<li>Receive realtime raw data from the connected devices, such as Galvanic Skin Response (GSR), Blood Volume Pulse (BVP), and accelerometers</li>
 	<li>Receive computed data derived from raw data, such as interbeat intervals (IBI)</li>
 	</ul>
 
 
-	<p><a href="#EmpaticaAPI">EmpaticaAPI</a> is the main singleton class that handles API authentication and devices discovery. <a href="#EmpaticaDeviceManager">EmpaticaDeviceManager</a>  is the class that handles the connection the communication with a single E3 device.</p>
+	<p><a href="#EmpaticaAPI">EmpaticaAPI</a> is the main singleton class that handles API authentication and devices discovery. <a href="#EmpaticaDeviceManager">EmpaticaDeviceManager</a>  is the class that handles the connection the communication with a single E4 device.</p>
 
 	<h2><a class="paddedLink" id="EmpaticaAPI"></a> EmpaticaAPI Class</h2>
 
@@ -91,7 +92,7 @@
 
 	<h4>Discussion</h4>
 
-	<p><strong> It is mandatory to call this method before using the EmpaLink API. </strong> If the key is not set or it results invalid, the connection to an E3 device will not be available and an exception will be raised at discovery time. It is recommended to call the method in the app delegate. The completion handler allows you to understand if authentication succeeded (and you can start invoking the API methods) or failed (the <code>description</code> argument will help you understand why).</p>
+	<p><strong> It is mandatory to call this method before using the EmpaLink API. </strong> If the key is not set or it results invalid, the connection to an E4 device will not be available and an exception will be raised at discovery time. It is recommended to call the method in the app delegate. The completion handler allows you to understand if authentication succeeded (and you can start invoking the API methods) or failed (the <code>description</code> argument will help you understand why).</p>
 
 	<pre><code>- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	    [EmpaticaAPI authenticateWithAPIKey:@"HERE_GOES_YOUR_API_KEY" completionHandler:^(BOOL success, NSString *description) {
@@ -103,7 +104,7 @@
 
 	<h3><a class="paddedLink" id="discoverDevicesWithDelegate:"></a> discoverDevicesWithDelegate:</h3>
 
-	<p>Ask the BLE manager to scan for Empatica E3 devices.<br/>
+	<p>Ask the BLE manager to scan for Empatica E4 devices.<br/>
 	+ (void)discoverDevicesWithDelegate:(id<EmpaticaDelegate>) <em>empaticaDelegate</em></p>
 
 	<h4>Parameters</h4>
@@ -189,7 +190,7 @@ After a successful scan, the BLE status is set to <a href="#BLEStatus">kBLEStatu
 <em>kBLEStatusReady</em><br/>
 &nbsp;&nbsp; The BLE central manager is ready to scan for devices.<br/>
 <em>kBLEStatusScanning</em><br/>
-&nbsp;&nbsp; The BLE central manager is scanning for E3 devices.<br/>
+&nbsp;&nbsp; The BLE central manager is scanning for E4 devices.<br/>
 
 
 <h2><a class="paddedLink" id="EmpaticaDeviceManager"></a> EmpaticaDeviceManager Class</h2>
@@ -226,7 +227,7 @@ After a successful scan, the BLE status is set to <a href="#BLEStatus">kBLEStatu
 
 <h3><a class="paddedLink" id="connectWithDeviceDelegate:"></a> connectWithDeviceDelegate:</h3>
 
-<p>Ask the device manager to estabilish a connection to the corresponding E3 device.<br/>
+<p>Ask the device manager to estabilish a connection to the corresponding E4 device.<br/>
 - (void) connectWithDeviceDelegate:(id<EmpaticaDeviceDelegate>)<em>deviceDelegate</em>;
 </p>
 <h4>Parameters</h4>
@@ -409,7 +410,7 @@ Notify when the <em>batteryLevel</em> property of the connected device changes.
 
 <h3><a class="paddedLink" id="DeviceStatus"></a> DeviceStatus</h3>
 
-<p>Defines the possible status of the E3 device</p>
+<p>Defines the possible status of the E4 device</p>
 
 <pre><code>typedef enum {
   kDeviceStatusDisconnected,
@@ -422,13 +423,13 @@ Notify when the <em>batteryLevel</em> property of the connected device changes.
 <h4>Constants</h4>
 
 <p><em>kDeviceStatusDisconnected</em><br/>
-&nbsp;&nbsp; The E3 device is not connected.<br/>
+&nbsp;&nbsp; The E4 device is not connected.<br/>
 <em>kDeviceStatusConnecting</em><br/>
-&nbsp;&nbsp; A connection with the E3 device is in progress<br/>
+&nbsp;&nbsp; A connection with the E4 device is in progress<br/>
 <em>kDeviceStatusConnected</em><br/>
-&nbsp;&nbsp; The E3 device is connected.<br/>
+&nbsp;&nbsp; The E4 device is connected.<br/>
 <em>kDeviceStatusDisconnecting</em><br/>
-&nbsp;&nbsp; A disconnection with the E3 device is in progress.<br/>
+&nbsp;&nbsp; A disconnection with the E4 device is in progress.<br/>
 
 
 </section>

@@ -7,14 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- <link href="//static-content1.empatica.com/YaJqf/./css/style.css" rel="stylesheet" type="text/css"> -->
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Empatica for Developers by empatica</title>
+    <title>E4 for Developers</title>
     <meta name="description" content="Empatica research products are currently compatible with three programming interfaces: Android and iOS SDKs and a Windows based Bluetooth Low Energy (BLE) Server.">
 
     <!-- Favicon -->
@@ -41,36 +41,70 @@
       <div class="inner">
 
         <header>
-          <h1>Empatica for Developers</h1>
-          <h2>Empatica Developer's Documentation</h2>
+          <h1>E4 wristband</h1>
+          <h2>for Developers</h2>
+          <section id="downloads" class="clearfix">
+            <a href="https://github.com/empatica" id="view-on-github" class="button"><span>View on GitHub</span></a>
+          </section>
         </header>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/empatica" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
 
-        <hr>
 
         <section id="main_content">
-          <h2><a id="empatica-developers-page" class="anchor" href="#empatica-developers-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>Empatica Programming Interfaces</h2>
 
-<p>Empatica research products are currently compatible with three programming interfaces: <a href="#android">Android</a> and <a href="#ios">iOS</a> SDKs and a <a href="#windows">Windows based Bluetooth Low Energy (BLE) Server</a>. All three of these solutions are designed to allow for real-time time connections to the E4’s data stream.</p>
+          <h2><a id="empatica-developers-page" class="anchor" href="#empatica-developers-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>E4 Programming Interfaces</h2>
 
-<p>In order to build your own applications using the Empatica API, you need an API Key and the SDK(s) for your platform(s) of choice. The key is used to authenticate your applications for accounting purposes. You can read the guide: <a href="https://support.empatica.com/hc/en-us/articles/206397545-Develop-your-own-app" title="Develop your own app">Develop your own app</a>.</p>
+<p>E4 wristband research product are compatible with the <a href="#android">Android</a> and <a href="#ios">iOS</a> platforms using the SDK and with <a href="#windows">Windows</a> using the Bluetooth Low Energy (BLE) Server. All solutions are designed to allow real-time data streaming from E4 devices.</p>
 
-<p><small>There are no REST APIs at this time so access to data that has been uploaded to the <a href="https://www.empatica.com/connect">Empatica Connect</a> web application is only accessible through the use of the GUI.</small></p>
+<p>In order to build your own applications you need an API Key and the SDK(s) for your platform(s) of choice. The key is used to authenticate your applications for accounting purposes. You can read the guide <a href="https://support.empatica.com/hc/en-us/articles/206397545-Develop-your-own-app" title="Develop your own app">Develop your own app</a>.</p>
+
+<p><small>There are no REST APIs at this time so access to data that has been uploaded to the <a href="https://www.empatica.com/connect">Empatica Connect</a> web application is only accessible through the use of the Web User Interface.</small></p>
+
 
 <h2><a id="mobile-platforms" class="anchor" href="#mobile-platforms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mobile SDKs</h2>
 
-<p>Empatica provides developers SDKs for mobile development, both for Android and iOS platforms.</p>
+<p>Empatica provides developers SDKs for mobile development for Android and iOS platforms.</p>
 
 <h3><a id="ios" class="anchor" href="#ios" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS SDK</h3>
 
-<p>You can find info on how to develop your mobile application using the <a href="ios-sdk-tutorial-072.html">Empatica SDK for iOS tutorial</a>. Sample projects are provided that demonstrate <a href="http://empatica.github.io/empatica-ios-sdk-sample-project-0.7.3-single-device.zip">single</a> and <a href="http://empatica.github.io/empatica-ios-sdk-sample-project-0.7.3-multiple-devices.zip">multiple</a> Empatica E4 wristbands connections from your iOS device.</p>
+<h4>E4link Framework</h4>
 
-<p>Also check our <a href="ios-sdk-api-reference-07.html">API reference</a>.</p>
+<p>E4link is the new name for the Framework which you can develop your custom application on iOS platform.
+  To download the latest version of the E4link you have to access to the <a href="https://www.empatica.com/connect">Empatica Connect</a> web portal and navigate in the Developer section.
+
+  Read how to develop your iOS application using the <a href="ios-sdk-tutorial-100.html">E4link SDK for iOS tutorial</a> and connect to your E4 wristbands from your iOS device. A Sample Xcode project is provided that demonstrate how to scan continuously for E4 wristband devices and connect to one or multiple devices at the same time and stream values <a href="https://github.com/empatica/e4link-sample-project-ios/archive/master.zip">E4link SDK Sample</a>
+</p>
+<p><code>
+  E4link.framework has been build using Xcode 9.3 and the iOS 11.3 SDK. The minimum deployment target is iOS 9.3. The framework works with both Objective-C and Swift, but does not support bitcode.
+</code></p>
+
+<p>For more detailed information check <a href="ios-sdk-api-reference-100.html">E4 link 1.0.0 API reference</a></p>
+
+<h4><a id="ios" class="anchor" href="#ios" aria-hidden="true"><span class="octicon octicon-link"></span></a>Legacy (EmpaLink 0.7)</h4>
+
+<p>You can find info on how to develop your mobile application using the <a href="ios-sdk-tutorial-070.html">Empatica SDK for iOS tutorial</a>. Sample projects are provided that demonstrate <a href="http://empatica.github.io/empatica-ios-sdk-sample-project-0.7.3-single-device.zip">single</a> and <a href="http://empatica.github.io/empatica-ios-sdk-sample-project-0.7.3-multiple-devices.zip">multiple</a> Empatica E4 wristbands connections from your iOS device.</p>
+
+<p><code>
+  EmpaLink.framework is the legacy version of the framework. The minimum deployment target is iOS 7.0
+</code></p>
+
+<p>For more detailed information check <a href="ios-sdk-api-reference-07.html">EmpaLink 0.7 API reference</a></p>
 
 <h3><a id="android" class="anchor" href="#android" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android SDK</h3>
+
+<h4></a>E4link Library</h4>
+
+<p>E4link is the new name for the Library which you can develop your custom application on Android.</p>
+
+<p>
+  <code>E4link Library has been built using Android Studio 3.1 and the Android SDK API Level 27. The minimum Android SDK API Level is 19.</code>
+</p>
+
+<p>
+  <code>E4link Library for Android will be released at the end of April, 2018</code>
+</p>
+
+<h4>Legacy (EmpaLink 2.1)</h4>
 
 <p>For development in Java on your prefered environment, EmpaLink for Android offers developers access to real-time data-streams from within your Android application. E4 data can be retrieved using the following methods:</p>
 
@@ -113,7 +147,7 @@
 </table>
 
 <p></p>
-<p>Note that button press/event mark timing is not yet available on the Android platform.</p> <p>You can find additional info, including a complete tutorial, on the <a href="android-sdk-tutorial-20.html">Empatica SDK for Android tutorial</a>.</p>
+<p>Note that button press/event mark timing is not yet available on the Android platform.</p> <p>You can find additional info, including a complete tutorial, on the <a href="android-sdk-tutorial-200.html">Empatica SDK for Android tutorial</a>.</p>
 
 <h4>Sample project</h4>
 <p>A sample console app that demonstrates how to establish a streaming connection to the E4 wristband can be found on the <a href="https://github.com/empatica/empalink-sample-project-android">Empalink Sample Project for Android GitHub project</a>. For simplicity the project demonstrates EDA streaming for ten-seconds - all other arguments are commented out.</p>
@@ -138,12 +172,13 @@
 <h2>
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact
 </h2>
-          <p>Having trouble with Empatica developer's software? <a href="mailto:support@empatica.com">Contact support</a> and we’ll help you sort it out.</p>
+          <p>Having trouble with Empatica E4 software for Developers? <a href="mailto:support@empatica.com">Contact Support</a> and we’ll help you sort it out.</p>
 
         </section>
         <footer>
-          <p>Having trouble with Empatica developer's software? <a href="mailto:support@empatica.com">Contact support</a> and we’ll help you sort it out.</p>
-        </footer>      </div>
+          <p>Having trouble with Empatica E4 software for Developers? <a href="mailto:support@empatica.com">Contact Support</a> and we’ll help you sort it out.</p>
+        </footer>
+      </div>
     </div>
   </body>
 </html>
