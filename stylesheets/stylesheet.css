@@ -56,12 +56,16 @@ body {
   background: #e7e7e7 url(../images/body-bg.png) 0 0 repeat;
 }
 
+section {
+	margin-top: 80px;
+}
+
 a {
   color: #00778B;
 	border-bottom: 1px dotted #00778B;
 }
 a:hover {
-  color: #c5000c;
+  color: #00414C;
 }
 
 header {
@@ -79,6 +83,14 @@ header h1 {
 
 header h2 {
   font-size: 24px;
+  font-weight: normal;
+  line-height: 1.3;
+  color: #aaa;
+  letter-spacing: -1px;
+}
+
+h2 span {
+  font-size: 20px;
   font-weight: normal;
   line-height: 1.3;
   color: #aaa;
@@ -165,6 +177,24 @@ code {
   border: solid 1px #ddd;
 }
 
+p.notes {
+  padding: 8px;
+  background-color: #E6E6E6;
+	text-shadow: none;
+	color: #222;
+	border-radius: 8px;
+}
+
+p.notes.warning {
+	background-color: #F2D584;
+	color: white !important;
+}
+
+p.notes.warning a {
+	color: #303030 !important;
+	border-bottom: 1px dotted #303030;
+}
+
 pre {
   padding: 20px;
   overflow: auto;
@@ -227,7 +257,7 @@ h2 {
   margin-bottom: 8px;
   font-size: 22px;
   font-weight: bold;
-  color: #303030;
+  color: #00778B;
 }
 
 h3 {
