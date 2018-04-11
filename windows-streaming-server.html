@@ -10,8 +10,8 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>E4 Streaming Server</title>
-    <meta name="description" content="Empatica TCP server allows to receive realtime data from multiple Empatica E4 devices.">
+    <title>E4 streaming server</title>
+    <meta name="description" content="E4 streaming server allows to receive realtime data from multiple Empatica E4 devices.">
 
     <!-- Favicon -->
     <link rel="icon" href="//static-content1.empatica.com/YaJqf/img/favicon.png" type="image/png">
@@ -38,23 +38,25 @@
 
       <header>
 				<p><a href="/">E4 for Developers</a> > E4 streaming server</p>
-      	<h1>E4 Streaming Server</h1>
+      	<h1>E4 streaming server</h1>
         <h2>for Windows</h2>
       </header>
 
       <section id="main_content">
 
-	<p>This is a <strong>reference guide</strong> for the communication protocol supported by the Empatica TCP Server.</p>
+	<p>This is a <strong>reference guide</strong> for the communication protocol of the E4 streaming server.</p>
 
-	<p>Empatica TCP server allows to receive <strong>realtime data</strong> from multiple Empatica E4 devices.</p>
+	<p>The E4 streaming server allows to forward <strong>realtime data</strong> of multiple Empatica E4 devices to multiple TCP socket connections.</p>
 
-	<p>Please note that for each TCP connection it is allowed to connect one Empatica Device at time. To connect to multiple devices, multiple TCP connections are required. The server accepts TCP sockets connections.</p>
+	<p>Please note that each TCP connection can receive data from only one Empatica E4 device. To connect to multiple devices, multiple TCP connections are required.</p>
 
-	<p>After a succesful connection from a client, the server waits for command messages.</p>
+	<p>After a successful connection from a client, the server listens for command messages.</p>
 
 		<p>The <a href="#general-message-structure">general message structure</a> is described in the following section, while details on the client commands and server responses are described in the <a href="#commands-responses">commands and data section</a>.</p>
 
 	<p>To get a glance of the communication protocol, visit the <a href="#protocol-example">protocol example section</a>.</p>
+          
+    <p>The E4 streaming server is intended to help read data streams from other scripts and applications, but can also be easily accessed e.g. for testing purposes with <a href="https://en.wikipedia.org/wiki/Telnet">Telnet</a>.</p>
 
 
 	<h2>
@@ -99,12 +101,10 @@
 		<a id="server-status" class="anchor" href="#server-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server status
 		</h3>
 
-	<p>The client requires the current status of the server. The server status is <strong>OK</strong> when the server is fully functional and ready to connect to Empatica E4 devices. The server status is <strong>ERR</strong> if something is wrong (often, problems are related to Bluetooth low energy adapter).</p>
+	<p>The client requests the current status of the server. Possible server status:</p>
 
-	<p>Possible server status:</p>
-
-	<li><strong>OK</strong>: the server is fully functional an d ready to connect to Empatica E4 devices.</li>
-	<li><strong>ERR</strong>: something is wrong (often, problems are related to the Bluetooth low energy adapter).</li>
+	<li><strong>OK</strong>: the server is fully functional and ready to connect to Empatica E4 devices.</li>
+	<li><strong>ERR</strong>: something is wrong. Often, problems are related to the Bluetooth LE adapter.</li>
 	<p></p>
 
 <pre><code>Client Request</code>
@@ -115,14 +115,55 @@
 	<code>R server_status OK</code>
 	<code>R server_status ERR &#60;reason&#62;</code>
 <code>Example:</code>
-	<code>R server_status ERR Bluetooth low energy not available on server`</code>
+	<code>R server_status ERR Bluetooth LE not available on server`</code>
 </pre>
-
-	<h3>
-		<a id="list-available-devices" class="anchor" href="#list-available-devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of available devices
+          
+          
+  <h3>
+		<a id="device-discover-list" class="anchor" href="#device-discover-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of discovered BTLE devices (manual BTLE)
 		</h3>
 
-	<p>The client requires the list of Empatica E4 devices in range and available for connection. The server responds with the number of available devices and a list of devices info.</p>
+	<p>The client requests the list of Empatica E4 devices, that are in range and not connected over BTLE. The server responds with the number of discovered devices and a list of device info. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE happens automatically.</p>
+          
+          <pre>Client Request
+	device_discover_list</pre>
+          
+          <pre>Server Response
+	R device_discover_list &#60;NUMBER_OF_DEVICES&#62; | &#60;DEVICE_INFO_1&#62; | &#60;DEVICE_INFO_2&#62;
+Example
+	R device_discover_list 2 | 9ff167 Empatica_E4 allowed | 740163 Empatica_E4 not_allowed</pre>
+          
+          <p>The format of the device info is the following:</p>
+
+<pre>DEVICE_INFO format
+	&#60;DEVICE_ID&#62; &#60;DEVICE_NAME&#62; &#60;API_KEY_PERMISSION&#62;
+Example
+	9ff167 Empatica_E4 allowed</pre>
+
+          <p>The strings <strong>allowed</strong> and <strong>not_allowed</strong> indicate if the devices are allowed to be used with the given API key.</p>
+          
+          <h3>
+		<a id="device-connect-btle" class="anchor" href="#device-connect-btle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect device over BTLE (manual BTLE)
+		</h3>
+
+	<p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and allowed by the API key. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE happens automatically.</p>
+          
+          <pre>Client Request
+	device_connect_btle
+    Example:
+device_connect_btle 9ff167</pre>
+
+<pre>Server Response
+	R device_connect_btle OK
+	R device_connect_btle ERR &#60;reason&#62;
+Example:
+	R device_connect_btle ERR The device has not been discovered yet</pre>
+
+	<h3>
+		<a id="list-available-devices" class="anchor" href="#list-available-devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of devices connected with BTLE
+		</h3>
+
+	<p>The client requests the list of Empatica E4 devices that are in range and connected with BTLE. The server responds with the number of connected devices and a list of device info.</p>
 
 <pre>Client Request
 	device_list</pre>
@@ -130,43 +171,27 @@
 <pre>Server Response
 	R device_list &#60;NUMBER_OF_DEVICES&#62; | &#60;DEVICE_INFO_1&#62; | &#60;DEVICE_INFO_2&#62;
 Example
-	R device_list 2 | 9ff167 Empatica_E4 available | 740163 Empatica_E4 available</pre>
+	R device_list 2 | 9ff167 Empatica_E4 | 740163 Empatica_E4</pre>
 
 <p>The format of the device info is the following:</p>
 
 <pre>DEVICE_INFO format
-	&#60;DEVICE_ID&#62; &#60;DEVICE_NAME&#62; &#60;AVAILABILITY&#62;
+	&#60;DEVICE_ID&#62; &#60;DEVICE_NAME&#62;
 Example
-	9ff167 Empatica E4 available</pre>
-
-<strong>DEVICE_ID</strong>
-
-<p>The device id is unique for every device. It is used by the client during a connect request.</p>
-
-<strong>DEVICE_NAME</strong>
-
-<p>The device name being used.</p>
-
-<strong>AVAILABILITY</strong>
-
-<p>Availability parameter is always available. Other values are reserved for future implementation.</p>
+	9ff167 Empatica_E4</pre>
 
 	<h3>
 		<a id="connect-device" class="anchor" href="#connect-device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect to a Device
 		</h3>
 
 <ol><li>The client sends a connection request to a specific device.</li>
-<li>Each TCP connection is allowed to connect to one Empatica Device at time.</li>
+<li>Each TCP connection is allowed to connect to one Empatica Device at a time.</li>
 <li>To connect to multiple devices, multiple TCP connections are required.</li></ol>
 
 <pre>Client Request
 	device_connect &#60;DEVICE_ID&#62;
 Example:
 device_connect 9ff167</pre>
-
-<strong>DEVICE_ID</strong>
-
-<p>The device id is returned from the server after a device_list command.</p>
 
 <pre>Server Response
 	R device_connect OK
@@ -178,7 +203,7 @@ Example:
 		<a id="disconnect-device" class="anchor" href="#disconnect-device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disconnect from a Device
 		</h3>
 
-<p>The client sends a device disconnection request. It will be disconnected from the currently connected device.</p>
+<p>The client sends a device disconnection request. It will be disconnected from the currently connected device and close the TCP connection.</p>
 
 <pre>Client Request
 	device_disconnect</pre>
@@ -189,62 +214,29 @@ Example:
 Example:
 	R device_disconnect ERR No connected device.</pre>
 
-<p>In case of device disconnection (e.g., the user switch off the device, or the battery runs out) the server sends the following packet</p>
-
-<pre>Device Disconnection
-	X device_disconnect</pre>
-
-
 	<h3>
-		<a id="subscribe-receive-data" class="anchor" href="#subscribe-receive-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Subscribe to Receive Data
+		<a id="subscribe-receive-data" class="anchor" href="#subscribe-receive-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Subscribe and Unsubscribe to Data Stream
 		</h3>
 
-	<p>To start receiving data from a given stream, the client sends a data subscription request specifying the desired stream.</p>
+	<p>To start or stop receiving data from a given stream, the client sends a data subscription requests specifying the desired stream.</p>
 
 <pre>Client Request
-	device_subscribe &#60;STREAM&#62; ON
+	device_subscribe &#60;STREAM&#62; &#60;STATUS&#62;
 Example:
 	device_subscribe gsr ON</pre>
 
 <pre>Server Response
-	R device_subscribe &#60;STREAM&#62; ON
+	R device_subscribe &#60;STREAM&#62; &#60;STATUS&#62;
 	R device_subscribe &#60;STREAM&#62; ERR &#60;REASON&#62;
 Example:
 	R device_subscribe gsr OK</pre>
+          
+<p>To subscribe to a stream specify <strong>ON</strong> and to unsubscribe <strong>OFF</strong>.</p>
 
 <strong>STREAM</strong>
 
-<p>The streams available are the following:</p>
+<p>The available streams available are:</p>
 
-
-<li>acc - 3-axis acceleration</li>
-<li>bvp - Blood Volume Pulse</li>
-<li>gsr - Galvanic Skin Response</li>
-<li>ibi - Interbeat Interval</li>
-<li>tmp - Skin Temperature</li>
-<li>bat - Device Battery</li>
-
-<p></p>
-<h3>
-<a id="unsubscribe-receive-data" class="anchor" href="#unsubscribe-receive-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unsubscribe from Receive Data
-</h3>
-
-	<p>To stop receiving data from a given stream, the client sends a data unsubscription request specifying the desired stream.</p>
-
-<pre>Client Request
-	device_subscribe &#60;STREAM&#62; OFF
-Example:
-	device_subscribe gsr OFF`</pre>
-
-<pre>Server Response
-	R device_subscribe &#60;STREAM&#62; OFF
-	R device_subscribe &#60;STREAM&#62; ERR &#60;REASON&#62;
-Example:
-	R device_subscribe gsr OFF</pre>
-
-<strong>STREAM</strong>
-
-<p>The streams available are the following:</p>
 
 <li>acc - 3-axis acceleration</li>
 <li>bvp - Blood Volume Pulse</li>
@@ -253,43 +245,33 @@ Example:
 <li>tmp - Skin Temperature</li>
 <li>bat - Device Battery</li>
 <li>tag - Tag taken from the device (by pressing the button)</li>
+
 <p></p>
 
 <h3>
-	<a id="suspend-data-streaming" class="anchor" href="#suspend-data-streaming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Suspend data streaming
+	<a id="suspend-data-streaming" class="anchor" href="#suspend-data-streaming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Suspend and resume data streaming
 	</h3>
 
-<p>To temporarily suspend the data streaming (without disconnecting or switching off the device), the client sends a pause request</p>
+<p>To temporarily suspend and resume the data streaming (without disconnecting or switching off the device), the client sends a pause requests</p>
 
 <pre>Client Request
-	pause ON</pre>
-
-<pre>Server Response
-	R pause ON
-	R pause ERR &#60;REASON&#62;
+	pause &#60;STATUS&#62;
 Example:
-	R pause ERR You are not connected to any device`</pre>
-
-<h3>
-	<a id="resume-data-streaming" class="anchor" href="#resume-data-streaming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resume data streaming
-	</h3>
-
-<p>To resume the data streaming, the client sends a resume request</p>
-
-<pre>Client Request
-	pause OFF</pre>
+    pause ON</pre>
 
 <pre>Server Response
-	R pause OFF
+	R pause &#60;STATUS&#62;
 	R pause ERR &#60;REASON&#62;
 Example:
 	R pause ERR You are not connected to any device</pre>
+
+  <p>To pause the stream specify <strong>ON</strong> and to resume <strong>OFF</strong>.</p>
 
 <h3>
 	<a id="data-streaming-packets" class="anchor" href="#data-streaming-packets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Streaming Packets
 	</h3>
 
-<p>After a succesful connection and stream subscription to an Empatica Device, the client starts receiving sensor's data from the server.</p>
+<p>After a successful connection and stream subscription to an Empatica Device, the client starts receiving sensor data from the server.</p>
 
 <pre>Stream Data Format
 	&#60;STREAM_TYPE&#62; &#60;TIMESTAMP&#62; &#60;DATA&#62;
@@ -298,7 +280,7 @@ Example
 
 <strong>STREAM_TYPE</strong>
 
-<p>The streams available are the following:</p>
+<p>The available streams are:</p>
 
 <li> E4_Acc - 3-axis acceleration</li>
 <li> E4_Bvp - Blood Volume Pulse</li>
@@ -306,22 +288,22 @@ Example
 <li> E4_Temp - Skin Temperature</li>
 <li> E4_Ibi - Interbeat Interval</li>
 <li> E4_Battery - Device Battery</li>
-<li> E4_Tag - Device Battery</li>
+<li> E4_Tag - Tag taken from the device (by pressing the button)</li>
 <p></p>
 
 <strong>TIMESTAMP</strong>
 
-<p>The timestamp for the sample in seconds defined as time interval between the sample received and the reference date, 1 January 1970, GMT.</p>
+<p>The timestamp for the sample in seconds defined as time interval between the sample received and the reference date, 1 January 1970, GMT. The value contains a fractional part to represent microseconds.</p>
 
 <strong>DATA</strong>
 
-<p>Each stream type has different data format as described below:</p>
+<p>Each stream type has a different data format as described below:</p>
 
 <strong>Acceleration data</strong>
 <p></p>
-<li> The acceleration value for x axis. The x axes is defined by the vector whose starting point is set to the center of the device and whose direction points towards the USB slot.</li>
-<li> The acceleration value for y axis. The y axes is defined by the vector whose starting point is set to the center of the device and whose direction points towards the shorter strap.</li>
-<li> The acceleration value for z axis. The x axes is defined by the vector whose starting point is set to the center of the device and whose direction points towards the bottom of the device.</li>
+<li> The acceleration value for x axis. The x axis is defined by the vector whose starting point is set to the center of the device and whose direction points towards the USB slot.</li>
+<li> The acceleration value for y axis. The y axis is defined by the vector whose starting point is set to the center of the device and whose direction points towards the shorter strap.</li>
+<li> The acceleration value for z axis. The z axis is defined by the vector whose starting point is set to the center of the device and whose direction points towards the bottom of the device.</li>
 <p></p>
 
 <pre>
@@ -381,7 +363,7 @@ E4_Tag 123345627891.123</pre>
 &#60;== R server_status OK
 
 ==&#62; device_list
-&#60;== R device_list 2 | 9ff167 Empatica E4 available | 7a3166 Empatica E4 available
+&#60;== R device_list 2 | 9ff167 Empatica_E4 | 7a3166 Empatica_E4
 
 ==&#62; device_connect ffffff
 &#60;== R device_connect ERR the requested device is not available
@@ -430,6 +412,7 @@ E4_Tag 123345627891.123</pre>
 <li>Your Empatica API Key (you can find yours <a href="https://www.empatica.com/connect/developer.php">here</a>, if you don't have one check this <a href="https://www.empatica.com/docs/support.empatica.com/hc/en-us/articles/203296395">support article</a></li>
 <li>The listening IP address of the server (is the address where the Empatica BLE Server will listen towhere you have to connect to send commands and receive data, e.g. 127.0.0.1)</li>
 <li>The listening port of the server</li>
+<li>Manual BTLE: BTLE connections needs to be established manually</li>
 
 <p></p>
 <p>After configuration set click the "Save" button.</p>
@@ -448,7 +431,8 @@ E4_Tag 123345627891.123</pre>
 
 <ol><li>Discovery and connection to the E4 device within Bluetooth range and will start listening to commands on the address and port specified in the settings panel.</li>
 <li>You can see the label under the button that tells that the app is discovering for E4.</li>
-<li>You can now switch on your E4 and the led will start to blink green.</li></ol>
+<li>You can now switch on your E4 and the led will start to blink green.</li>
+<li>After few seconds the E4 will be visible in the list. If manual BTLE is configured, a button is shown in the "Actions" row to allow for selective connection over BTLE.</li></ol>
 <p></p>
 <strong>When the connection is established the led will become light blue and then blue, meaning that the connection was completed.</strong>
 
@@ -461,7 +445,19 @@ When you want to stop streaming from a device, simply switch off your E4 and it 
 <p>If you want to connect another E4 device, wait when the previous E4 is connected, then press the "Discover other E4 devices" button, the app will start to discover other devices.</p>
 
 <p>Make sure to keep the devices not too close because the radios might saturate when the antennas are too close, resulting in lack of communication over-the-air.</p>
-
+          
+<h3>
+	<a id="using-server-cmd" class="anchor" href="#using-server-cmd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the server from other code or scripts
+	</h3>
+          <p>The E4 streaming server can be run without GUI, passing the connection information and API key as startup arguments and handling the BTLE connections manually.</p>
+          
+          <pre>
+	EmpaticaBLEServer.exe &#60;API_KEY&#62; &#60;SERVER_ADRESS&#62; &#60;SERVER_PORT&#62;
+Example
+	EmpaticaBLEServer.exe 11111111111111111111111111111111 127.0.0.1 8000</pre>
+          
+          <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution.</p>
+          
 <h3>
 	<a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Troubleshooting
 	</h3>
