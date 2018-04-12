@@ -197,6 +197,15 @@ p.notes.warning a {
 	border-bottom: 1px dotted #303030;
 }
 
+span.notes.warning {
+	font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal;
+	background-color: #F2D584;
+	color: #303030 !important;
+	border: 1px dotted #303030;
+	text-shadow: none;
+	font-size: 10pt;
+	padding: 2px 8px;
+}
 
 p.notes.suggestion {
 	background-color: #86C494;
@@ -376,7 +385,7 @@ footer a:hover {
   }
 	#downloads {
 	  margin-bottom: 25px;
-		top: 0px;
+		top: 20px;
 		position: relative;
 	}
   #download-zip, #download-tar-gz {

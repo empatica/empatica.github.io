@@ -57,7 +57,7 @@
 
 
 	<h2>
-		<a id="general-message-structure" class="anchor" href="#general-message-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>General message structure
+		<a id="general-message-structure" class="anchor" href="#general-message-structure" aria-hidden="true"></a>General message structure
 		</h2>
 
 
@@ -91,11 +91,11 @@
 	</pre>
 
 	<h2>
-		<a id="commands-responses" class="anchor" href="#commands-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands and Responses Details
+		<a id="commands-responses" class="anchor" href="#commands-responses" aria-hidden="true"></a>Commands and Responses Details
 		</h2>
 
 		<h3>
-		<a id="server-status" class="anchor" href="#server-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server status
+		<a id="server-status" class="anchor" href="#server-status" aria-hidden="true"></a>Server status
 		</h3>
 
 	<p>The client requires the current status of the server. The server status is <strong>OK</strong> when the server is fully functional and ready to connect to Empatica E4 devices. The server status is <strong>ERR</strong> if something is wrong (often, problems are related to Bluetooth low energy adapter).</p>
@@ -118,7 +118,7 @@
 </pre>
 
 	<h3>
-		<a id="list-available-devices" class="anchor" href="#list-available-devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of available devices
+		<a id="list-available-devices" class="anchor" href="#list-available-devices" aria-hidden="true"></a>List of available devices
 		</h3>
 
 	<p>The client requires the list of Empatica E4 devices in range and available for connection. The server responds with the number of available devices and a list of devices info.</p>
@@ -151,7 +151,7 @@ Example
 <p>Availability parameter is always available. Other values are reserved for future implementation.</p>
 
 	<h3>
-		<a id="connect-device" class="anchor" href="#connect-device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect to a Device
+		<a id="connect-device" class="anchor" href="#connect-device" aria-hidden="true"></a>Connect to a Device
 		</h3>
 
 <ol><li>The client sends a connection request to a specific device.</li>
@@ -174,7 +174,7 @@ Example:
 	R device_connect ERR The device requested for connection is not available.</pre>
 
 	<h3>
-		<a id="disconnect-device" class="anchor" href="#disconnect-device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disconnect from a Device
+		<a id="disconnect-device" class="anchor" href="#disconnect-device" aria-hidden="true"></a>Disconnect from a Device
 		</h3>
 
 <p>The client sends a device disconnection request. It will be disconnected from the currently connected device.</p>
@@ -195,7 +195,7 @@ Example:
 
 
 	<h3>
-		<a id="subscribe-receive-data" class="anchor" href="#subscribe-receive-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Subscribe to Receive Data
+		<a id="subscribe-receive-data" class="anchor" href="#subscribe-receive-data" aria-hidden="true"></a>Subscribe to Receive Data
 		</h3>
 
 	<p>To start receiving data from a given stream, the client sends a data subscription request specifying the desired stream.</p>
@@ -225,7 +225,7 @@ Example:
 
 <p></p>
 <h3>
-<a id="unsubscribe-receive-data" class="anchor" href="#unsubscribe-receive-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unsubscribe from Receive Data
+<a id="unsubscribe-receive-data" class="anchor" href="#unsubscribe-receive-data" aria-hidden="true"></a>Unsubscribe from Receive Data
 </h3>
 
 	<p>To stop receiving data from a given stream, the client sends a data unsubscription request specifying the desired stream.</p>
@@ -255,7 +255,7 @@ Example:
 <p></p>
 
 <h3>
-	<a id="suspend-data-streaming" class="anchor" href="#suspend-data-streaming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Suspend data streaming
+	<a id="suspend-data-streaming" class="anchor" href="#suspend-data-streaming" aria-hidden="true"></a>Suspend data streaming
 	</h3>
 
 <p>To temporarily suspend the data streaming (without disconnecting or switching off the device), the client sends a pause request</p>
@@ -270,7 +270,7 @@ Example:
 	R pause ERR You are not connected to any device`</pre>
 
 <h3>
-	<a id="resume-data-streaming" class="anchor" href="#resume-data-streaming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resume data streaming
+	<a id="resume-data-streaming" class="anchor" href="#resume-data-streaming" aria-hidden="true"></a>Resume data streaming
 	</h3>
 
 <p>To resume the data streaming, the client sends a resume request</p>
@@ -285,7 +285,7 @@ Example:
 	R pause ERR You are not connected to any device</pre>
 
 <h3>
-	<a id="data-streaming-packets" class="anchor" href="#data-streaming-packets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Streaming Packets
+	<a id="data-streaming-packets" class="anchor" href="#data-streaming-packets" aria-hidden="true"></a>Data Streaming Packets
 	</h3>
 
 <p>After a succesful connection and stream subscription to an Empatica Device, the client starts receiving sensor's data from the server.</p>
@@ -370,7 +370,7 @@ E4_Battery 123345627891.123 0.2</pre>
 E4_Tag 123345627891.123</pre>
 
 <h2>
-	<a id="protocol-example" class="anchor" href="#protocol-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Protocol Example
+	<a id="protocol-example" class="anchor" href="#protocol-example" aria-hidden="true"></a>Protocol Example
 	</h2>
 
 <p>Please find below  an example of messages exchange between client and server during a brief acquisition session.</p>
@@ -400,13 +400,13 @@ E4_Tag 123345627891.123</pre>
 [EOF]</pre>
 
 <h2>
-	<a id="using-ble-server" class="anchor" href="#using-ble-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using Empatica BLE Server for Windows (Beta)
+	<a id="using-ble-server" class="anchor" href="#using-ble-server" aria-hidden="true"></a>Using Empatica BLE Server for Windows (Beta)
 	</h2>
 
 <p>NOTE: this part of the documentation is still under development</p>
 
 <h3>
-	<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements
+	<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"></a>Requirements
 	</h3>
 
 <li>Windows PC running Windows 7 or Windows 8 with Visual C++ Redistributable Package installed (download from <a href="http://www.microsoft.com/en-us/download/details.aspx?id=40784">here</a></li>
@@ -415,13 +415,13 @@ E4_Tag 123345627891.123</pre>
 <li>Empatica E4’s must be registered to the API key owner to be accessible via the server application</li>
 <p></p>
 <h3>
-	<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation
+	<a id="installation" class="anchor" href="#installation" aria-hidden="true"></a>Installation
 	</h3>
 
 <p>Download the latest release of the Empatica BLE Server for Windows (Beta) from <a href="http://get.empatica.com/win/EmpaticaBLEServer.html">here</a></p>
 
 <h3>
-	<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration
+	<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"></a>Configuration
 	</h3>
 
 <p>The first time you start the server, you will see the settings panel that allows you to set:</p>
@@ -434,7 +434,7 @@ E4_Tag 123345627891.123</pre>
 <p>After configuration set click the "Save" button.</p>
 
 <h3>
-	<a id="using-server" class="anchor" href="#using-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the server
+	<a id="using-server" class="anchor" href="#using-server" aria-hidden="true"></a>Using the server
 	</h3>
 
 <p>You will see the default view of the server, click the "Start" button.</p>
@@ -462,7 +462,7 @@ When you want to stop streaming from a device, simply switch off your E4 and it 
 <p>Make sure to keep the devices not too close because the radios might saturate when the antennas are too close, resulting in lack of communication over-the-air.</p>
 
 <h3>
-	<a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Troubleshooting
+	<a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"></a>Troubleshooting
 	</h3>
 
 <strong>When I click "Save" in settings panel, I see the "Invalid Api key" message</strong>

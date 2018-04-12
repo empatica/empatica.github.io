@@ -68,7 +68,7 @@
 
 
      <h2>
-      <a id="general-message-structure" class="anchor" href="#general-message-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>General message structure
+      <a id="general-message-structure" class="anchor" href="#general-message-structure" aria-hidden="true"></a>General message structure
     </h2>
 
 
@@ -102,12 +102,12 @@
   </pre>
 
   <h2>
-    <a id="commands-responses" class="anchor" href="#commands-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands and Responses Details
+    <a id="commands-responses" class="anchor" href="#commands-responses" aria-hidden="true"></a>Commands and Responses Details
   </h2>
 
 
   <h3>
-    <a id="device-discover-list" class="anchor" href="#device-discover-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of discovered BTLE devices (manual BTLE)
+    <a id="device-discover-list" class="anchor" href="#device-discover-list" aria-hidden="true"></a>List of discovered BTLE devices (manual BTLE)
   </h3>
 
   <p>The client requests the list of Empatica E4 devices, that are in range and not connected over BTLE. The server responds with the number of discovered devices and a list of device info. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE happens automatically.</p>
@@ -130,7 +130,7 @@
  <p>The strings <strong>allowed</strong> and <strong>not_allowed</strong> indicate if the devices are allowed to be used with the given API key.</p>
 
  <h3>
-  <a id="device-connect-btle" class="anchor" href="#device-connect-btle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect device over BTLE (manual BTLE)
+  <a id="device-connect-btle" class="anchor" href="#device-connect-btle" aria-hidden="true"></a>Connect device over BTLE (manual BTLE)
 </h3>
 
 <p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and allowed by the API key. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE happens automatically.</p>
@@ -147,7 +147,7 @@ device_connect_btle 9ff167</pre>
 R device_connect_btle ERR The device has not been discovered yet</pre>
 
 <h3>
-  <a id="list-available-devices" class="anchor" href="#list-available-devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of devices connected with BTLE
+  <a id="list-available-devices" class="anchor" href="#list-available-devices" aria-hidden="true"></a>List of devices connected with BTLE
 </h3>
 
 <p>The client requests the list of Empatica E4 devices that are in range and connected with BTLE. The server responds with the number of connected devices and a list of device info.</p>
@@ -168,7 +168,7 @@ R device_list 2 | 9ff167 Empatica_E4 | 740163 Empatica_E4</pre>
 9ff167 Empatica_E4</pre>
 
 <h3>
-  <a id="connect-device" class="anchor" href="#connect-device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect to a Device
+  <a id="connect-device" class="anchor" href="#connect-device" aria-hidden="true"></a>Connect to a Device
 </h3>
 
 <ol><li>The client sends a connection request to a specific device.</li>
@@ -187,7 +187,7 @@ R device_list 2 | 9ff167 Empatica_E4 | 740163 Empatica_E4</pre>
  R device_connect ERR The device requested for connection is not available.</pre>
 
  <h3>
-  <a id="disconnect-device" class="anchor" href="#disconnect-device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disconnect from a Device
+  <a id="disconnect-device" class="anchor" href="#disconnect-device" aria-hidden="true"></a>Disconnect from a Device
 </h3>
 
 <p>The client sends a device disconnection request. It will be disconnected from the currently connected device and close the TCP connection.</p>
@@ -202,7 +202,7 @@ device_disconnect</pre>
 R device_disconnect ERR No connected device.</pre>
 
 <h3>
-  <a id="subscribe-receive-data" class="anchor" href="#subscribe-receive-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Subscribe and Unsubscribe to Data Stream
+  <a id="subscribe-receive-data" class="anchor" href="#subscribe-receive-data" aria-hidden="true"></a>Subscribe and Unsubscribe to Data Stream
 </h3>
 
 <p>To start or stop receiving data from a given stream, the client sends a data subscription requests specifying the desired stream.</p>
@@ -236,7 +236,7 @@ R device_subscribe gsr OK</pre>
 <p></p>
 
 <h3>
-  <a id="suspend-data-streaming" class="anchor" href="#suspend-data-streaming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Suspend and resume data streaming
+  <a id="suspend-data-streaming" class="anchor" href="#suspend-data-streaming" aria-hidden="true"></a>Suspend and resume data streaming
 </h3>
 
 <p>To temporarily suspend and resume the data streaming (without disconnecting or switching off the device), the client sends a pause requests</p>
@@ -255,7 +255,7 @@ R pause ERR You are not connected to any device</pre>
 <p>To pause the stream specify <strong>ON</strong> and to resume <strong>OFF</strong>.</p>
 
 <h3>
-  <a id="data-streaming-packets" class="anchor" href="#data-streaming-packets" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Streaming Packets
+  <a id="data-streaming-packets" class="anchor" href="#data-streaming-packets" aria-hidden="true"></a>Data Streaming Packets
 </h3>
 
 <p>After a successful connection and stream subscription to an Empatica Device, the client starts receiving sensor data from the server.</p>
@@ -340,7 +340,7 @@ E4_Battery 123345627891.123 0.2</pre>
 E4_Tag 123345627891.123</pre>
 
 <h2>
-  <a id="protocol-example" class="anchor" href="#protocol-example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Protocol Example
+  <a id="protocol-example" class="anchor" href="#protocol-example" aria-hidden="true"></a>Protocol Example
 </h2>
 
 <p>Please find below  an example of messages exchange between client and server during a brief acquisition session.</p>
@@ -368,13 +368,13 @@ E4_Tag 123345627891.123</pre>
 [EOF]</pre>
 
 <h2>
-  <a id="using-ble-server" class="anchor" href="#using-ble-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using E4 streaming server for Windows
+  <a id="using-ble-server" class="anchor" href="#using-ble-server" aria-hidden="true"></a>Using E4 streaming server for Windows
 </h2>
 
 <p>NOTE: this part of the documentation is still under development</p>
 
 <h3>
-  <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements
+  <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"></a>Requirements
 </h3>
 
 <li>Windows PC running Windows 7 or Windows 8 with Visual C++ Redistributable Package installed (download from <a href="http://www.microsoft.com/en-us/download/details.aspx?id=40784">here</a></li>
@@ -383,13 +383,13 @@ E4_Tag 123345627891.123</pre>
 <li>Empatica E4’s must be registered to the API key owner to be accessible via the server application</li>
 <p></p>
 <h3>
-  <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation
+  <a id="installation" class="anchor" href="#installation" aria-hidden="true"></a>Installation
 </h3>
 
 <p>Download the latest release of the E4 streaming server for Windows from <a href="http://get.empatica.com/win/EmpaticaBLEServer.html">here</a></p>
 
 <h3>
-  <a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration
+  <a id="configuration" class="anchor" href="#configuration" aria-hidden="true"></a>Configuration
 </h3>
 
 <p>The first time you start the server, you will see the settings panel that allows you to set:</p>
@@ -403,7 +403,7 @@ E4_Tag 123345627891.123</pre>
 <p>After configuration set click the "Save" button.</p>
 
 <h3>
-  <a id="using-server" class="anchor" href="#using-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the server
+  <a id="using-server" class="anchor" href="#using-server" aria-hidden="true"></a>Using the server
 </h3>
 
 <p>You will see the default view of the server, click the "Start" button.</p>
@@ -432,7 +432,7 @@ E4_Tag 123345627891.123</pre>
   <p>Make sure to keep the devices not too close because the radios might saturate when the antennas are too close, resulting in lack of communication over-the-air.</p>
 
   <h3>
-   <a id="using-server-cmd" class="anchor" href="#using-server-cmd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the server from other code or scripts
+   <a id="using-server-cmd" class="anchor" href="#using-server-cmd" aria-hidden="true"></a>Running the server from other code or scripts
  </h3>
  <p>The E4 streaming server can be run without GUI, passing the connection information and API key as startup arguments and handling the BTLE connections manually.</p>
 
@@ -444,7 +444,7 @@ E4_Tag 123345627891.123</pre>
  <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution.</p>
 
  <h3>
-   <a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Troubleshooting
+   <a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"></a>Troubleshooting
  </h3>
 
  <strong>When I click "Save" in settings panel, I see the "Invalid Api key" message</strong>

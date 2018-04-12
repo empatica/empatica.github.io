@@ -49,11 +49,11 @@
         </header>
 
 
-        <p class="notes suggestion">Take a look a the new E4 link and E4 streaming server (previously called EmpaLink library and Windows BLE Server) <a href="new.html">E4 link and E4 streaming server</a></p>
+        <p class="notes warning">Take a look a the new E4 link and E4 streaming server (previously called EmpaLink library and Windows BLE Server) <a href="new.html">E4 link and E4 streaming server</a></p>
 
         <section id="main_content">
 
-          <h2><a id="empatica-developers-page" class="anchor" href="#empatica-developers-page" aria-hidden="true"><span class="octicon octicon-link"></span></a>E4 Programming Interfaces</h2>
+          <h2><a id="empatica-developers-page" class="anchor" href="#empatica-developers-page" aria-hidden="true"></a>E4 Programming Interfaces</h2>
 
 <p>E4 wristband research product are compatible with the <a href="#android">Android</a> and <a href="#ios">iOS</a> platforms using the SDK and with <a href="#windows">Windows</a> using the Bluetooth Low Energy (BLE) Server. All solutions are designed to allow real-time data streaming from E4 devices.</p>
 
@@ -62,13 +62,13 @@
 <p><small>There are no REST APIs at this time so access to data that has been uploaded to the <a href="https://www.empatica.com/connect">Empatica Connect</a> web application is only accessible through the use of the Web User Interface.</small></p>
 
 
-<h2><a id="mobile-platforms" class="anchor" href="#mobile-platforms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mobile SDKs</h2>
+<h2><a id="mobile-platforms" class="anchor" href="#mobile-platforms" aria-hidden="true"></a>Mobile SDKs</h2>
 
 <p>Empatica provides developers SDKs for mobile development for Android and iOS platforms.</p>
 
-<h3><a id="ios" class="anchor" href="#ios" aria-hidden="true"><span class="octicon octicon-link"></span></a>iOS SDK</h3>
+<h3><a id="ios" class="anchor" href="#ios" aria-hidden="true"></a>iOS SDK</h3>
 
-<h4>EmpaLink 0.7 <code>DEPRECATED</code></h4>
+<h4>EmpaLink 0.7 <span class="notes warning">DEPRECATED</span></h4>
 
 <p>You can find info on how to develop your mobile application using the <a href="ios-sdk-tutorial-070.html">Empatica SDK for iOS tutorial</a>. Sample projects are provided that demonstrate <a href="http://empatica.github.io/empatica-ios-sdk-sample-project-0.7.3-single-device.zip">single</a> and <a href="http://empatica.github.io/empatica-ios-sdk-sample-project-0.7.3-multiple-devices.zip">multiple</a> Empatica E4 wristbands connections from your iOS device.</p>
 
@@ -78,9 +78,9 @@
 
 <p>For more detailed information check <a href="ios-sdk-api-reference-070.html">EmpaLink 0.7 API reference</a></p>
 
-<h3><a id="android" class="anchor" href="#android" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android SDK</h3>
+<h3><a id="android" class="anchor" href="#android" aria-hidden="true"></a>Android SDK</h3>
 
-<h4>EmpaLink 2.1 <code>DEPRECATED</code></h4>
+<h4>EmpaLink 2.1 <span class="notes warning">DEPRECATED</span></h4>
 
 <p>For development in Java on your prefered environment, EmpaLink for Android offers developers access to real-time data-streams from within your Android application. E4 data can be retrieved using the following methods:</p>
 
@@ -128,25 +128,20 @@
 <h4>Sample project</h4>
 <p>A sample console app that demonstrates how to establish a streaming connection to the E4 wristband can be found on the <a href="https://github.com/empatica/empalink-sample-project-android">Empalink Sample Project for Android GitHub project</a>. For simplicity the project demonstrates EDA streaming for ten-seconds - all other arguments are commented out.</p>
 
-<h2><a id="streaming-servers" class="anchor" href="#streaming-servers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Streaming servers</h2>
+<h2><a id="streaming-servers" class="anchor" href="#streaming-servers" aria-hidden="true"></a>Streaming servers</h2>
+<h4>BLE Server <span class="notes warning">DEPRECATED</span></h4>
 
 <p>Stream data from one or more E4 wristbands into your Windows-based application with the Empatica BLE Server for Windows. Empatica’s Windows BLE Server solution operates exclusively with the <a href="http://www.silabs.com/products/wireless/bluetooth/bluetooth-low-energy-modules/ble121lr-bluetooth-smart-long-range-module1">BlueGiga BLED112 Bluetooth Smart Dongle.</a> </p>
 
-<h3><a id="windows" class="anchor" href="#windows" aria-hidden="true"><span class="octicon octicon-link"></span></a>Windows</h3>
+<p>The Empatica BLE Server is a Windows application that can connect to multiple Empatica E4 devices using Bluetooth and stream data to local endpoint using multiple socket connections. Instructions about the Empatica BLE server are available at <a href="windows-ble-server.html">Empatica BLE server documentation</a>.</p>
 
-<h4><a id="ble-client" class="anchor" href="#ble-client" aria-hidden="true"><span class="octicon octicon-link"></span></a>BLE client</h4>
+<h4><a id="ble-client" class="anchor" href="#ble-client" aria-hidden="true"></a>BLE client <span class="notes warning">DEPRECATED</span></h4>
 
 <p>The Empatica BLE Client application, developed in C#, is an demonstration console that works in conjunction with the BLE Server in the Windows platform. Instructions and client source-code available at: <a href="https://github.com/empatica/ble-server-client-windows">Empatica BLE client GitHub project</a>.</p>
 
-<h4>
-<a id="ble-server" class="anchor" href="#ble-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>BLE server
-</h4>
-
-<p>The Empatica BLE Server is a Windows application that can connect to multiple Empatica E4 devices using Bluetooth and stream data to local endpoint using multiple socket connections. Instructions about the Empatica BLE server are available at <a href="windows-ble-server.html">Empatica BLE server documentation</a>.</p>
-
 <p></p>
 <h2>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"></a>Support or Contact
 </h2>
           <p>Having trouble with Empatica E4 software for Developers? <a href="mailto:support@empatica.com">Contact Support</a> and we’ll help you sort it out.</p>
 

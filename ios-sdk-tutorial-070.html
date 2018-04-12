@@ -54,14 +54,14 @@
 <p>While using our sample projects, you are just required to use your Empatica API key in the <code>AppDelegate.m</code> source file and remember to delete the line starting with <code>"#error"</code></p>
 
 <h2>
-<a id="own-project" class="anchor" href="#own-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add to your own project
+<a id="own-project" class="anchor" href="#own-project" aria-hidden="true"></a>Add to your own project
 </h2>
 <h2>
-<a id="step1-setup" class="anchor" href="#step1-setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 1: Setup
+<a id="step1-setup" class="anchor" href="#step1-setup" aria-hidden="true"></a>Step 1: Setup
 </h2>
 
 <h3>
-<a id="add-empalink-api" class="anchor" href="#add-empalink-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add Empalink API</h3>
+<a id="add-empalink-api" class="anchor" href="#add-empalink-api" aria-hidden="true"></a>Add Empalink API</h3>
 
 <ol>
 <li><p>Download the EmpaLink Framework for iOS from your <a href="https://www.empatica.com/connect/developer.php">Developer Area in Empatica Connect</a>.</p></li>
@@ -77,7 +77,7 @@
 <p><img src="images/tut2_0.7.png"></p>
 
 <h3>
-<a id="add-background-comm-support" class="anchor" href="#add-background-comm-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add background communication support</h3>
+<a id="add-background-comm-support" class="anchor" href="#add-background-comm-support" aria-hidden="true"></a>Add background communication support</h3>
 
 <p>EmpaLink communicates with the Empatica device even while the app is in the background. Your app requires the authorization to run CoreBluetooth service in the background to work.</p>
 
@@ -92,12 +92,12 @@
 <p><img src="images/tut3_0.7.png"></p>
 
 <h2>
-<a id="step2-initialize-api" class="anchor" href="#step2-initialize-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 2: Initialize the API</h2>
+<a id="step2-initialize-api" class="anchor" href="#step2-initialize-api" aria-hidden="true"></a>Step 2: Initialize the API</h2>
 
 <p>The final steps to set up the API require adding a few lines of code to your main app delegate. Being the class where you include iOS required methods like <code>applicationDidFinishLaunching</code>.</p>
 
 <h3>
-<a id="import-empatica-api" class="anchor" href="#import-empatica-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Import the Empatica API header</h3>
+<a id="import-empatica-api" class="anchor" href="#import-empatica-api" aria-hidden="true"></a>Import the Empatica API header</h3>
 
 <p>At the top of your app delegate source file - and anywhere you invoke the <code>DeviceManager</code> class, you’ll need to include the correct EmpaLink header.</p>
 
@@ -112,7 +112,7 @@
 <code>#import &#60;EmpaLink-ios-0.7-full/EmpaticaAPI-0.7.h&#62;</code></pre>
 
 <h3>
-<a id="set-empatica-api-key" class="anchor" href="#set-empatica-api-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set Your Empatica API Key</h3>
+<a id="set-empatica-api-key" class="anchor" href="#set-empatica-api-key" aria-hidden="true"></a>Set Your Empatica API Key</h3>
 
 <p>The EmpaLink API requires your developer key in order to make any requests to the API. Call this method with your API key when launching your app, adding the following code to your app delegate source file usually <code>AppDelegate.m</code>:</p>
 
@@ -138,12 +138,12 @@
 }</pre>
 
 <h3>
-<a id="step3-empalink-api" class="anchor" href="#step3-empalink-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Step 3: Use the EmpaLink API</h3>
+<a id="step3-empalink-api" class="anchor" href="#step3-empalink-api" aria-hidden="true"></a>Step 3: Use the EmpaLink API</h3>
 
 <p>Now you are ready to start using the EmpaLink API in your project. If your app will connect to one E4 device at time, read the <a href="#single-device">Single device</a> section below. If your app needs to connect to multiple E4 devices at the same time, please jump to the <a href="#multiple-devices">Multiple Devices</a> section.</p>
 
 <h4>
-<a id="single-device" class="anchor" href="#single-device" aria-hidden="true"><span class="octicon octicon-link"></span></a>Single device</h4>
+<a id="single-device" class="anchor" href="#single-device" aria-hidden="true"></a>Single device</h4>
 
 <p>Your main view controller - for example, in the default single view app, <code>ViewController.m</code> must implement the <code>EmpaticaDelegate</code> and <code>EmpaticaDeviceDelegate</code> protocols.</p>
 
@@ -179,7 +179,7 @@ if (devices.count > 0) {
   }</pre>
 
 <h3>
-<a id="multiple-devices" class="anchor" href="#multiple-devices" aria-hidden="true"><span class="octicon octicon-link"></span></a>Multiple devices</h3>
+<a id="multiple-devices" class="anchor" href="#multiple-devices" aria-hidden="true"></a>Multiple devices</h3>
 
 <p>Your main view controller (for example, in the default single view app, ViewController.m) must implement EmpaticaDelegate protocol.</p>
 
