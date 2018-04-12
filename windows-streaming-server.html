@@ -55,7 +55,7 @@
 		<p>The <a href="#general-message-structure">general message structure</a> is described in the following section, while details on the client commands and server responses are described in the <a href="#commands-responses">commands and data section</a>.</p>
 
 	<p>To get a glance of the communication protocol, visit the <a href="#protocol-example">protocol example section</a>.</p>
-          
+
     <p>The E4 streaming server is intended to help read data streams from other scripts and applications, but can also be easily accessed e.g. for testing purposes with <a href="https://en.wikipedia.org/wiki/Telnet">Telnet</a>.</p>
 
 
@@ -96,22 +96,22 @@
 	<h2>
 		<a id="commands-responses" class="anchor" href="#commands-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands and Responses Details
 		</h2>
-          
-          
+
+
   <h3>
 		<a id="device-discover-list" class="anchor" href="#device-discover-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>List of discovered BTLE devices (manual BTLE)
 		</h3>
 
 	<p>The client requests the list of Empatica E4 devices, that are in range and not connected over BTLE. The server responds with the number of discovered devices and a list of device info. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE happens automatically.</p>
-          
+
           <pre>Client Request
 	device_discover_list</pre>
-          
+
           <pre>Server Response
 	R device_discover_list &#60;NUMBER_OF_DEVICES&#62; | &#60;DEVICE_INFO_1&#62; | &#60;DEVICE_INFO_2&#62;
 Example
 	R device_discover_list 2 | 9ff167 Empatica_E4 allowed | 740163 Empatica_E4 not_allowed</pre>
-          
+
           <p>The format of the device info is the following:</p>
 
 <pre>DEVICE_INFO format
@@ -120,13 +120,13 @@ Example
 	9ff167 Empatica_E4 allowed</pre>
 
           <p>The strings <strong>allowed</strong> and <strong>not_allowed</strong> indicate if the devices are allowed to be used with the given API key.</p>
-          
+
           <h3>
 		<a id="device-connect-btle" class="anchor" href="#device-connect-btle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect device over BTLE (manual BTLE)
 		</h3>
 
 	<p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and allowed by the API key. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE happens automatically.</p>
-          
+
           <pre>Client Request
 	device_connect_btle
     Example:
@@ -209,7 +209,7 @@ Example:
 	R device_subscribe &#60;STREAM&#62; ERR &#60;REASON&#62;
 Example:
 	R device_subscribe gsr OK</pre>
-          
+
 <p>To subscribe to a stream specify <strong>ON</strong> and to unsubscribe <strong>OFF</strong>.</p>
 
 <strong>STREAM</strong>
@@ -360,7 +360,7 @@ E4_Tag 123345627891.123</pre>
 [EOF]</pre>
 
 <h2>
-	<a id="using-ble-server" class="anchor" href="#using-ble-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using Empatica BLE Server for Windows (Beta)
+	<a id="using-ble-server" class="anchor" href="#using-ble-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using E4 streaming server for Windows
 	</h2>
 
 <p>NOTE: this part of the documentation is still under development</p>
@@ -378,7 +378,7 @@ E4_Tag 123345627891.123</pre>
 	<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation
 	</h3>
 
-<p>Download the latest release of the Empatica BLE Server for Windows (Beta) from <a href="http://get.empatica.com/win/EmpaticaBLEServer.html">here</a></p>
+<p>Download the latest release of the E4 streaming server for Windows from <a href="http://get.empatica.com/win/EmpaticaBLEServer.html">here</a></p>
 
 <h3>
 	<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration
@@ -387,7 +387,7 @@ E4_Tag 123345627891.123</pre>
 <p>The first time you start the server, you will see the settings panel that allows you to set:</p>
 
 <li>Your Empatica API Key (you can find yours <a href="https://www.empatica.com/connect/developer.php">here</a>, if you don't have one check this <a href="https://www.empatica.com/docs/support.empatica.com/hc/en-us/articles/203296395">support article</a></li>
-<li>The listening IP address of the server (is the address where the Empatica BLE Server will listen towhere you have to connect to send commands and receive data, e.g. 127.0.0.1)</li>
+<li>The listening IP address of the server (is the address where the E4 streaming server will listen towhere you have to connect to send commands and receive data, e.g. 127.0.0.1)</li>
 <li>The listening port of the server</li>
 <li>Manual BTLE: BTLE connections needs to be established manually</li>
 
@@ -422,19 +422,19 @@ When you want to stop streaming from a device, simply switch off your E4 and it 
 <p>If you want to connect another E4 device, wait when the previous E4 is connected, then press the "Discover other E4 devices" button, the app will start to discover other devices.</p>
 
 <p>Make sure to keep the devices not too close because the radios might saturate when the antennas are too close, resulting in lack of communication over-the-air.</p>
-          
+
 <h3>
 	<a id="using-server-cmd" class="anchor" href="#using-server-cmd" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the server from other code or scripts
 	</h3>
           <p>The E4 streaming server can be run without GUI, passing the connection information and API key as startup arguments and handling the BTLE connections manually.</p>
-          
+
           <pre>
 	EmpaticaBLEServer.exe &#60;API_KEY&#62; &#60;SERVER_ADRESS&#62; &#60;SERVER_PORT&#62;
 Example
 	EmpaticaBLEServer.exe 11111111111111111111111111111111 127.0.0.1 8000</pre>
-          
+
           <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution.</p>
-          
+
 <h3>
 	<a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Troubleshooting
 	</h3>
