@@ -96,27 +96,6 @@
 	<h2>
 		<a id="commands-responses" class="anchor" href="#commands-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commands and Responses Details
 		</h2>
-
-		<h3>
-		<a id="server-status" class="anchor" href="#server-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server status
-		</h3>
-
-	<p>The client requests the current status of the server. Possible server status:</p>
-
-	<li><strong>OK</strong>: the server is fully functional and ready to connect to Empatica E4 devices.</li>
-	<li><strong>ERR</strong>: something is wrong. Often, problems are related to the Bluetooth LE adapter.</li>
-	<p></p>
-
-<pre><code>Client Request</code>
-	<code>server_status</code>
-</pre>
-
-<pre><code>Server Response</code>
-	<code>R server_status OK</code>
-	<code>R server_status ERR &#60;reason&#62;</code>
-<code>Example:</code>
-	<code>R server_status ERR Bluetooth LE not available on server`</code>
-</pre>
           
           
   <h3>
@@ -359,8 +338,6 @@ E4_Tag 123345627891.123</pre>
 <p>Please find below  an example of messages exchange between client and server during a brief acquisition session.</p>
 
 <pre>[OPEN TCP CONNECTION]
-==&#62; server_status
-&#60;== R server_status OK
 
 ==&#62; device_list
 &#60;== R device_list 2 | 9ff167 Empatica_E4 | 7a3166 Empatica_E4
