@@ -165,7 +165,6 @@ a.button span {
 }
 
 code, pre {
-  margin-bottom: 30px;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal;
   font-size: 14px;
   color: #222;
@@ -195,17 +194,27 @@ p.notes.warning a {
 	border-bottom: 1px dotted #303030;
 }
 
+
+p.notes.suggestion {
+	background-color: #86C494;
+	color: white !important;
+}
+
+p.notes.suggestion a {
+	color: #303030 !important;
+	border-bottom: 1px dotted #303030;
+}
+
 pre {
-  padding: 20px;
+  padding: 0px;
   overflow: auto;
   color: #f2f2f2;
   text-shadow: none;
-  background: #303030;
 }
 pre code {
-  padding: 0;
-  color: #f2f2f2;
-  background-color: #303030;
+	padding: 0px;
+	margin: 0px;
+  color: #303030;
   border: none;
 }
 
