@@ -107,6 +107,16 @@ h2 span {
   margin: 0 auto;
 }
 
+.example {
+    padding: 10px;
+    border-radius: 10px;
+    background: #00778b3d;
+}
+
+.example code {
+    margin: 15px;
+}
+
 #container .inner img {
   max-width: 100%;
 }
