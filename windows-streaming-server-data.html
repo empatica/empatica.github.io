@@ -83,6 +83,8 @@
                     <h3>Timestamp</h3>
                     <p></p>
                     <p>The timestamp for the sample in seconds defined as time interval between the sample received and the reference date, 1 January 1970, GMT. The value contains a fractional part to represent microseconds.</p>
+                    
+                    <p>The sample timestamps are calculated with reference to the first packet received by the E4 streaming server. Upon reception of the first packet, the system timestamp is recorded and the sample timestamps of the first and any further packets are calculated from the reference timestamp and the sample frequency of the respective stream.<br/>Since the E4 starts streaming once the BTLE connection is established, the E4 streaming server starts receiving packets even without any TCP clients subscribed to streams.</p>
 
                     <h3>Data</h3>
                     <p></p>
