@@ -1,471 +1,79 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-  <title>E4 streaming server</title>
-  <meta name="description" content="E4 streaming server allows to receive realtime data from multiple Empatica E4 devices.">
+        <title>E4 streaming server</title>
+        <meta name="description" content="E4 streaming server allows to receive realtime data from multiple Empatica E4 devices.">
 
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="highlight/styles/github.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="highlight/styles/github.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+        <!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
-  <!-- Favicon -->
-  <link rel="icon" href="//static-content1.empatica.com/YaJqf/img/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="//static-content1.empatica.com/YaJqf/img/favicon.png">
-  <link href="//static-content1.empatica.com/YaJqf/img/favicon.png" rel="shortcut icon" type="image/x-icon">
+        <!-- Favicon -->
+        <link rel="icon" href="//static-content1.empatica.com/YaJqf/img/favicon.png" type="image/png">
+        <link rel="apple-touch-icon" href="//static-content1.empatica.com/YaJqf/img/favicon.png">
+        <link href="//static-content1.empatica.com/YaJqf/img/favicon.png" rel="shortcut icon" type="image/x-icon">
 
-  <!-- Google Analytics -->
-  <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        <!-- Google Analytics -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-   ga('create', 'UA-25632719-2', 'auto');
-   ga('require', 'linkid', 'linkid.js');
-   ga('require', 'displayfeatures');
-   ga('send', 'pageview');
- </script>
+            ga('create', 'UA-25632719-2', 'auto');
+            ga('require', 'linkid', 'linkid.js');
+            ga('require', 'displayfeatures');
+            ga('send', 'pageview');
+        </script>
 
- <script src="highlight/highlight.pack.js"></script>
- <script>hljs.initHighlightingOnLoad();</script>
+        <script src="highlight/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
 
-</head>
+    </head>
 
-<body>
-<div id="container">
-  <div class="inner">
+    <body>
+        <div id="container">
+            <div class="inner">
 
-    <header>
-      <p><a href="/">E4 for Developers</a> > E4 streaming server</p>
-      <h1>E4 streaming server</h1>
-      <h2>for Windows</h2>
-    </header>
+                <header>
+                    <p><a href="/">E4 for Developers</a> > E4 streaming server</p>
+                    <h1>E4 streaming server</h1>
+                    <h2>for Windows</h2>
+                    <h6>Updated May, 2018</h6>
+                </header>
 
-    <section id="main_content">
+                <section id="main_content">
 
-     <p>This is a <strong>reference guide</strong> for the communication protocol of the E4 streaming server.</p>
+                    <p>This is a <strong>reference guide</strong> for the communication protocol of the E4 streaming server.</p>
 
-     <p>The E4 streaming server allows to forward <strong>realtime data</strong> of multiple Empatica E4 devices to multiple TCP socket connections.</p>
+                    <p>The E4 streaming server allows to forward <strong>realtime data</strong> of multiple Empatica E4 devices to multiple TCP socket connections. Please note that each TCP connection can receive data from only one Empatica E4 device. To connect to multiple devices, multiple TCP connections are required.<br/>
+                    The E4 streaming server is intended to make the data streams available to scripts and applications. However, the data streams can also be easily accessed e.g. for testing purposes with <a href="https://en.wikipedia.org/wiki/Telnet">Telnet</a>.</p>
 
-     <p>Please note that each TCP connection can receive data from only one Empatica E4 device. To connect to multiple devices, multiple TCP connections are required.</p>
+                    <h3>Getting Started</h3>
+                    <p></p>
+                    
+                    <p>Please visit the <a href="windows-streaming-server-usage.html">Using E4 streaming server</a> page to learn about how to get the E4 streaming server started in Windows and how to connect E4s.</p>
 
-     <p>After a successful connection from a client, the server listens for command messages.</p>
+                    <p>To find out how a connected TCP client communicates with the E4 streaming server, please refer to the page <a href="windows-streaming-server-commands.html">Message Protocol</a>. There you will also find a <a href="windows-streaming-server-commands.html#protocol-example">protocol example</a>.</p>
 
-     <p>The <a href="#general-message-structure">general message structure</a> is described in the following section, while details on the client commands and server responses are described in the <a href="#commands-responses">commands and data section</a>.</p>
+                    <p>The message structure of the live data is described on the page <a href="windows-streaming-server-data.html">Data Streaming Packets</a>.</p>
 
-     <p>To get a glance of the communication protocol, visit the <a href="#protocol-example">protocol example section</a>.</p>
 
-     <p>The E4 streaming server is intended to help read data streams from other scripts and applications, but can also be easily accessed e.g. for testing purposes with <a href="https://en.wikipedia.org/wiki/Telnet">Telnet</a>.</p>
 
-
-     <h2>
-      <a id="general-message-structure" class="anchor" href="#general-message-structure" aria-hidden="true"></a>General message structure
-    </h2>
-
-
-    <p>Messages are ASCII strings terminated with a newline (in Windows '\r\n') character. Some commands have parameters, which are separated by spaces.</p>
-
-    <p>Client requests are in the following format</p>
-    <p><code>&#60;COMMAND&#62; &#60;ARGUMENT_LIST&#62;</code></p>
-
-
-
-   <h3>Example</h3>
-   <pre>
-    <code class="shell">$ device_subscribe gsr ON</code>
-  </pre>
-
-  <p>Messages from server containing <strong>responses to commands</strong> are in the following format</p>
-  <p><code>R &#60;COMMAND&#62; &#60;ARGUMENT_LIST&#62;</code></p>
-  <h3>Example</h3>
-  <pre>
-    <code class="shell">$ R device_subscribe acc ON</code>
-  </pre>
-
-  <p>Messages from server containing data from device are in the following format</p>
-
-  <p>
-    <code>&#60;STREAM_TYPE&#62; &#60;TIMESTAMP&#62; &#60;DATA&#62;</code>
-  </p>
-  <h3>Example</h3>
-  <pre>
-    <code class="shell">$ G 123345627891.123 3.129</code>
-  </pre>
-
-  <h2>
-    <a id="commands-responses" class="anchor" href="#commands-responses" aria-hidden="true"></a>Commands and Responses Details
-  </h2>
-
-
-  <h3>
-    <a id="device-discover-list" class="anchor" href="#device-discover-list" aria-hidden="true"></a>List of discovered BTLE devices (manual BTLE)
-  </h3>
-
-  <p>The client requests the list of Empatica E4 devices, that are in range and not connected over BTLE. The server responds with the number of discovered devices and a list of device info. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE happens automatically.</p>
-
-  <pre>Client Request
-  device_discover_list</pre>
-
-  <pre>Server Response
-   R device_discover_list &#60;NUMBER_OF_DEVICES&#62; | &#60;DEVICE_INFO_1&#62; | &#60;DEVICE_INFO_2&#62;
-   Example
- R device_discover_list 2 | 9ff167 Empatica_E4 allowed | 740163 Empatica_E4 not_allowed</pre>
-
- <p>The format of the device info is the following:</p>
-
- <pre>DEVICE_INFO format
-   &#60;DEVICE_ID&#62; &#60;DEVICE_NAME&#62; &#60;API_KEY_PERMISSION&#62;
-   Example
- 9ff167 Empatica_E4 allowed</pre>
-
- <p>The strings <strong>allowed</strong> and <strong>not_allowed</strong> indicate if the devices are allowed to be used with the given API key.</p>
-
- <h3>
-  <a id="device-connect-btle" class="anchor" href="#device-connect-btle" aria-hidden="true"></a>Connect device over BTLE (manual BTLE)
-</h3>
-
-<p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and allowed by the API key. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE happens automatically.</p>
-
-<pre>Client Request
-  device_connect_btle
-  Example:
-device_connect_btle 9ff167</pre>
-
-<pre>Server Response
-  R device_connect_btle OK
-  R device_connect_btle ERR &#60;reason&#62;
-  Example:
-R device_connect_btle ERR The device has not been discovered yet</pre>
-
-<h3>
-  <a id="list-available-devices" class="anchor" href="#list-available-devices" aria-hidden="true"></a>List of devices connected with BTLE
-</h3>
-
-<p>The client requests the list of Empatica E4 devices that are in range and connected with BTLE. The server responds with the number of connected devices and a list of device info.</p>
-
-<pre>Client Request
-device_list</pre>
-
-<pre>Server Response
-  R device_list &#60;NUMBER_OF_DEVICES&#62; | &#60;DEVICE_INFO_1&#62; | &#60;DEVICE_INFO_2&#62;
-  Example
-R device_list 2 | 9ff167 Empatica_E4 | 740163 Empatica_E4</pre>
-
-<p>The format of the device info is the following:</p>
-
-<pre>DEVICE_INFO format
-  &#60;DEVICE_ID&#62; &#60;DEVICE_NAME&#62;
-  Example
-9ff167 Empatica_E4</pre>
-
-<h3>
-  <a id="connect-device" class="anchor" href="#connect-device" aria-hidden="true"></a>Connect to a Device
-</h3>
-
-<ol><li>The client sends a connection request to a specific device.</li>
-  <li>Each TCP connection is allowed to connect to one Empatica Device at a time.</li>
-  <li>To connect to multiple devices, multiple TCP connections are required.</li></ol>
-
-  <pre>Client Request
-   device_connect &#60;DEVICE_ID&#62;
-   Example:
- device_connect 9ff167</pre>
-
- <pre>Server Response
-   R device_connect OK
-   R device_connect ERR &#60;reason&#62;
-   Example:
- R device_connect ERR The device requested for connection is not available.</pre>
-
- <h3>
-  <a id="disconnect-device" class="anchor" href="#disconnect-device" aria-hidden="true"></a>Disconnect from a Device
-</h3>
-
-<p>The client sends a device disconnection request. It will be disconnected from the currently connected device and close the TCP connection.</p>
-
-<pre>Client Request
-device_disconnect</pre>
-
-<pre>Server Response
-  R device_disconnect OK
-  R device_disconnect ERR &#60;reason&#62;
-  Example:
-R device_disconnect ERR No connected device.</pre>
-
-<h3>
-  <a id="subscribe-receive-data" class="anchor" href="#subscribe-receive-data" aria-hidden="true"></a>Subscribe and Unsubscribe to Data Stream
-</h3>
-
-<p>To start or stop receiving data from a given stream, the client sends a data subscription requests specifying the desired stream.</p>
-
-<pre>Client Request
-  device_subscribe &#60;STREAM&#62; &#60;STATUS&#62;
-  Example:
-device_subscribe gsr ON</pre>
-
-<pre>Server Response
-  R device_subscribe &#60;STREAM&#62; &#60;STATUS&#62;
-  R device_subscribe &#60;STREAM&#62; ERR &#60;REASON&#62;
-  Example:
-R device_subscribe gsr OK</pre>
-
-<p>To subscribe to a stream specify <strong>ON</strong> and to unsubscribe <strong>OFF</strong>.</p>
-
-<strong>STREAM</strong>
-
-<p>The available streams available are:</p>
-
-
-<li>acc - 3-axis acceleration</li>
-<li>bvp - Blood Volume Pulse</li>
-<li>gsr - Galvanic Skin Response</li>
-<li>ibi - Interbeat Interval</li>
-<li>tmp - Skin Temperature</li>
-<li>bat - Device Battery</li>
-<li>tag - Tag taken from the device (by pressing the button)</li>
-
-<p></p>
-
-<h3>
-  <a id="suspend-data-streaming" class="anchor" href="#suspend-data-streaming" aria-hidden="true"></a>Suspend and resume data streaming
-</h3>
-
-<p>To temporarily suspend and resume the data streaming (without disconnecting or switching off the device), the client sends a pause requests</p>
-
-<pre>Client Request
-  pause &#60;STATUS&#62;
-  Example:
-pause ON</pre>
-
-<pre>Server Response
-  R pause &#60;STATUS&#62;
-  R pause ERR &#60;REASON&#62;
-  Example:
-R pause ERR You are not connected to any device</pre>
-
-<p>To pause the stream specify <strong>ON</strong> and to resume <strong>OFF</strong>.</p>
-
-<h3>
-  <a id="data-streaming-packets" class="anchor" href="#data-streaming-packets" aria-hidden="true"></a>Data Streaming Packets
-</h3>
-
-<p>After a successful connection and stream subscription to an Empatica Device, the client starts receiving sensor data from the server.</p>
-
-<pre>Stream Data Format
-  &#60;STREAM_TYPE&#62; &#60;TIMESTAMP&#62; &#60;DATA&#62;
-  Example
-G 123345627891.123 3.129</pre>
-
-<strong>STREAM_TYPE</strong>
-
-<p>The available streams are:</p>
-
-<li> E4_Acc - 3-axis acceleration</li>
-<li> E4_Bvp - Blood Volume Pulse</li>
-<li> E4_Gsr - Galvanic Skin Response</li>
-<li> E4_Temp - Skin Temperature</li>
-<li> E4_Ibi - Interbeat Interval</li>
-<li> E4_Battery - Device Battery</li>
-<li> E4_Tag - Tag taken from the device (by pressing the button)</li>
-<p></p>
-
-<strong>TIMESTAMP</strong>
-
-<p>The timestamp for the sample in seconds defined as time interval between the sample received and the reference date, 1 January 1970, GMT. The value contains a fractional part to represent microseconds.</p>
-
-<strong>DATA</strong>
-
-<p>Each stream type has a different data format as described below:</p>
-
-<strong>Acceleration data</strong>
-<p></p>
-<li> The acceleration value for x axis. The x axis is defined by the vector whose starting point is set to the center of the device and whose direction points towards the USB slot.</li>
-<li> The acceleration value for y axis. The y axis is defined by the vector whose starting point is set to the center of the device and whose direction points towards the shorter strap.</li>
-<li> The acceleration value for z axis. The z axis is defined by the vector whose starting point is set to the center of the device and whose direction points towards the bottom of the device.</li>
-<p></p>
-
-<pre>
-  Acceleration data
-E4_Acc 123345627891.123 51 -2 -10</pre>
-
-<p><strong>Blood Volume Pulse data</strong></p>
-
-<p>The value of the BVP sample. The value is derived from the light absorbance of the arterial blood. The raw signal is filtered to remove movement artifacts.</p>
-
-<pre>Blood Volume Pulse data
-E4_Bvp 123345627891.123 31.128</pre>
-
-<p><strong>Galvanic Skin Response data</strong></p>
-
-<p>The value of the GSR sample. The value is expressed in microsiemens.</p>
-
-<pre>Galvanic Skin Response data
-E4_Gsr 123345627891.123 3.129`</pre>
-
-<p><strong>Temperature data</strong></p>
-
-<p>The value of the temperature sample in Celsius degrees. The value is derived from the optical temperature sensor placed on the wrist.</p>
-
-<pre>Temperature data
-E4_Temperature 123345627891.123 35.82`</pre>
-
-<p><strong>Interbeat Interval data</strong></p>
-
-<p>The value of the IBI sample. The value is the distance from the previous detected heartbeat in seconds.</p>
-
-<pre>Interbeat Interval data
-E4_Ibi 123345627891.123 0.822</pre>
-
-<p><strong>Battery level data</strong></p>
-
-<p>The battery level of the device. Values: [0.0 - 1.0]</p>
-
-<pre>Battery level data
-E4_Battery 123345627891.123 0.2</pre>
-
-<p><strong>Tag data</strong></p>
-
-<p>The tags taken from the device</p>
-
-<pre>Battery level data
-E4_Tag 123345627891.123</pre>
-
-<h2>
-  <a id="protocol-example" class="anchor" href="#protocol-example" aria-hidden="true"></a>Protocol Example
-</h2>
-
-<p>Please find below  an example of messages exchange between client and server during a brief acquisition session.</p>
-
-<pre>[OPEN TCP CONNECTION]
-
-  ==&#62; device_list
-  &#60;== R device_list 2 | 9ff167 Empatica_E4 | 7a3166 Empatica_E4
-
-  ==&#62; device_connect ffffff
-  &#60;== R device_connect ERR the requested device is not available
-
-  ==&#62; device_connect 9ff167
-  &#60;== R device_connect OK
-
-  ==&#62; device_subscribe bvp ON
-  &#60;== R device_subscribe bvp OK
-
-  &#60;== B 123345627891.123 3.212
-  &#60;== B 123345627891.327 10.423
-  &#60;== B 123345627891.472 12.665
-
-  ==&#62; device_disconnect
-  &#60;== R device_disconnect OK
-[EOF]</pre>
-
-<h2>
-  <a id="using-ble-server" class="anchor" href="#using-ble-server" aria-hidden="true"></a>Using E4 streaming server for Windows
-</h2>
-
-<p>NOTE: this part of the documentation is still under development</p>
-
-<h3>
-  <a id="requirements" class="anchor" href="#requirements" aria-hidden="true"></a>Requirements
-</h3>
-
-<li>Windows PC running Windows 7 or Windows 8 with Visual C++ Redistributable Package installed (download from <a href="http://www.microsoft.com/en-us/download/details.aspx?id=40784">here</a></li>
-<li>The app is currently working only with <a href="https://www.silabs.com/products/wireless/bluetooth/bluetooth-low-energy-modules/bled112-bluetooth-smart-dongle">Bluegiga Bluetooth Smart Dongle</a>, Driver/Installation guide <a href="https://www.silabs.com/documents/login/software/BLED112-Signed-Win-Drv.zip">here</a> (A Silicon Labs account from the is required)</li>
-<li>Empatica E4 Sensor with firmware build 0.0.1.505+ installed (If you've bought your E4 after May 2015 the firmware should be already updated)</li>
-<li>Empatica E4’s must be registered to the API key owner to be accessible via the server application</li>
-<p></p>
-<h3>
-  <a id="installation" class="anchor" href="#installation" aria-hidden="true"></a>Installation
-</h3>
-
-<p>Download the latest release of the E4 streaming server for Windows from <a href="http://get.empatica.com/win/EmpaticaBLEServer.html">here</a></p>
-
-<h3>
-  <a id="configuration" class="anchor" href="#configuration" aria-hidden="true"></a>Configuration
-</h3>
-
-<p>The first time you start the server, you will see the settings panel that allows you to set:</p>
-
-<li>Your Empatica API Key (you can find yours <a href="https://www.empatica.com/connect/developer.php">here</a>, if you don't have one check this <a href="https://www.empatica.com/docs/support.empatica.com/hc/en-us/articles/203296395">support article</a></li>
-<li>The listening IP address of the server (is the address where the E4 streaming server will listen towhere you have to connect to send commands and receive data, e.g. 127.0.0.1)</li>
-<li>The listening port of the server</li>
-<li>Manual BTLE: BTLE connections needs to be established manually</li>
-
-<p></p>
-<p>After configuration set click the "Save" button.</p>
-
-<h3>
-  <a id="using-server" class="anchor" href="#using-server" aria-hidden="true"></a>Using the server
-</h3>
-
-<p>You will see the default view of the server, click the "Start" button.</p>
-
-<p>If the dongle is not connected (or your PC can't communicate with it, i.e. because you didn't install the dongle's drivers), the discovery won't start and the message "Dongle not connected" is displayed at the bottom.</p>
-
-<p>If the dongle was not connected, plug it to your PC and press the "Refresh" button placed in the bottom left corner of the app.</p>
-
-<p>If the dongle is connected, the server will start:</p>
-
-<ol><li>Discovery and connection to the E4 device within Bluetooth range and will start listening to commands on the address and port specified in the settings panel.</li>
-  <li>You can see the label under the button that tells that the app is discovering for E4.</li>
-  <li>You can now switch on your E4 and the led will start to blink green.</li>
-  <li>After few seconds the E4 will be visible in the list. If manual BTLE is configured, a button is shown in the "Actions" row to allow for selective connection over BTLE.</li></ol>
-  <p></p>
-  <strong>When the connection is established the led will become light blue and then blue, meaning that the connection was completed.</strong>
-
-  <p>After a while (around 40 seconds), the led will be switched off in order to save battery.
-
-  When any device is connected, the device ID and the list of the current TCP connections are displayed.</p>
-  <p>
-  When you want to stop streaming from a device, simply switch off your E4 and it will be disconnected from the app.</p>
-
-  <p>If you want to connect another E4 device, wait when the previous E4 is connected, then press the "Discover other E4 devices" button, the app will start to discover other devices.</p>
-
-  <p>Make sure to keep the devices not too close because the radios might saturate when the antennas are too close, resulting in lack of communication over-the-air.</p>
-
-  <h3>
-   <a id="using-server-cmd" class="anchor" href="#using-server-cmd" aria-hidden="true"></a>Running the server from other code or scripts
- </h3>
- <p>The E4 streaming server can be run without GUI, passing the connection information and API key as startup arguments and handling the BTLE connections manually.</p>
-
- <pre>
-   EmpaticaBLEServer.exe &#60;API_KEY&#62; &#60;SERVER_ADRESS&#62; &#60;SERVER_PORT&#62;
-   Example
- EmpaticaBLEServer.exe 11111111111111111111111111111111 127.0.0.1 8000</pre>
-
- <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution.</p>
-
- <h3>
-   <a id="troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"></a>Troubleshooting
- </h3>
-
- <strong>When I click "Save" in settings panel, I see the "Invalid Api key" message</strong>
-
- <p>Please try to insert again your API Key (you can find your API key <a href="https://www.empatica.com/connect/developer.php">here</a>. If you have still the issue, please contact our <a href="support@empatica.com">support</a> </p>
-
- <strong>When I click "Start", I can't get my E4 connected</strong>
-
- <p>Try to follow these steps in order to get your E4 connected:</p>
-
- <li>Launch the app</li>
- <li>Check that the dongle is connected (you should see a "Dongle connected" label) at the bottom of the app's window</li>
- <li>Click the "Start" button</li>
- <li>Switch on your E4</li>
- <p></p>
- <p>If the app can't connect to your E4 before the led becomes red (and memory mode starts) please contact our <a href="mailto:support@empatica.com">support</a> writing us your Api key and the serial number of the device you're using (placed close to sensor's led)</p>
-
- <footer>
-  <p>Having trouble with Empatica developer`s software? <a href="mailto:support@empatica.com">Contact support</a> and we’ll help you sort it out.</p>
-</footer>
-</div>
-</div>
-</body>
+                    <footer>
+                        <p>Having trouble with Empatica E4 software for Developers? <a href="mailto:support@empatica.com">Contact Support</a> and we’ll help you sort it out.</p>
+                    </footer>
+                </section>
+            </div>
+        </div>
+    </body>
 </html>
