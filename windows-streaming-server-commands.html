@@ -310,6 +310,44 @@
                     <p></p>
 
                     <p>To pause the stream specify <strong>ON</strong> and to resume <strong>OFF</strong>.</p>
+                    
+                    
+                    <h3 id="protocol-example">System Messages</h3>
+                    <p></p>
+                    
+                    <p>In certain events the E4 streaming server sends an informative system message to the TCP clients.</p>
+                    
+                    <h4>
+                       BTLE Connection Lost
+                    </h4>
+                    <p></p>
+                    
+                    <p>When the E4 streaming server loses connection to a device over BTLE, a disconnection message is sent to all TCP clients that are bound to the device.</p>
+                    
+                    Server Message:
+                    <p><code>R connection lost to device &#60;DEVICE_ID&#62;</code></p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">R connection lost to device 9ff167</code>
+                    </div>
+                    <p></p>
+                    
+                    
+                    <h4>
+                       BTLE Connection Re-Established
+                    </h4>
+                    <p></p>
+                    
+                    <p>When a previously connected device is connected again over BTLE to the E4 streaming server, a connection re-established message is sent to all TCP clients that are bound to the device. This message is sent independent of the setting <strong>Autoreconnect BTLE</strong> and of how the BTLE connection to the device was dropped.</p>
+                    
+                    Server Message:
+                    <p><code>R connection re-established to device &#60;DEVICE_ID&#62;</code></p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">R connection re-established to device 9ff167</code>
+                    </div>
+                    <p></p>
+                    
 
                     <h3 id="protocol-example">Protocol Example (no Manual BTLE)</h3>
                     <p></p>
