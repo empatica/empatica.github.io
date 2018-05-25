@@ -143,6 +143,31 @@
                         <code class="shell">R device_connect_btle ERR The device has not been discovered yet</code>
                     </div>
                     <p></p>
+                    
+                    <h4>
+                        Disconnect Device from BTLE
+                    </h4>
+                    <p></p>
+
+                    <p>The client sends a BTLE disconnection request for a specific device. The server will disconnect the device from BTLE. This command terminates active connections as well as stops reconnection attempts to devices that have temporarily lost BTLE connection.</p>
+
+                    Client Request:
+                    <p><code>device_disconnect_btle</code></p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">device_disconnect_btle 9ff167</code>
+                    </div>
+                    <p></p>
+                    Server Response:
+                    <p>
+                        <code>R device_disconnect_btle OK</code><br/>
+                        <code>R device_disconnect_btle ERR &#60;reason&#62;</code>
+                    </p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">R device_disconnect_btle ERR The device is not connected over btle</code>
+                    </div>
+                    <p></p>
 
                     <h4>
                         List of Devices Connected over BTLE
@@ -175,9 +200,8 @@
                     </h4>
                     <p></p>
 
-                    <ol><li>The client sends a connection request to a specific device.</li>
-                        <li>Each TCP connection is allowed to connect to one Empatica Device at a time.</li>
-                        <li>To connect to multiple devices, multiple TCP connections are required.</li></ol>
+                    <p>The client sends a connection request to a specific device. The E4 streaming server binds the client connected by TCP to the device connected over BTLE. The bound client needs to subscribe to channels with the <a href="#subscribe-receive-data">device_subscribe</a> command in order to start receiving data.</p>
+                    <p>Each TCP connection is allowed to connect to one Empatica Device at a time. To receive data from multiple devices, multiple TCP connections are required. The TCP client remains bound to the device regardless of the status of the BTLE connection.</p>
 
                     Client Request:
                     <p><code>device_connect &#60;DEVICE_ID&#62;</code></p>
@@ -202,7 +226,7 @@
                     </h4>
                     <p></p>
 
-                    <p>The client sends a device disconnection request. It will be disconnected from the currently connected device and close the TCP connection.</p>
+                    <p>The client sends a device disconnection request. It will be disconnected from the currently connected device and close the TCP connection to the E4 streaming server. The device will remain connected to the E4 streaming server over BTLE.</p>
 
                     Client Request:
                     <p><code>device_disconnect</code></p>
@@ -222,7 +246,8 @@
                     </h4>
                     <p></p>
 
-                    <p>To start or stop receiving data from a given stream, the client sends a data subscription requests specifying the desired stream.</p>
+                    <p>To start or stop receiving data from a given stream, the client sends a data subscription requests specifying the desired stream. The client needs to be first bound to a device with the <a href="#connect-device">device_connect</a> command.</p>
+                    <p>Subscriptions persist independent of the BTLE connection status of the device.</p>
 
                     Client Request:
                     <p><code>device_subscribe &#60;STREAM&#62; &#60;STATUS&#62;</code></p>

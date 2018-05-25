@@ -81,6 +81,7 @@
                         <li>The IP address the server bind to and clients have to connect to, e.g. 127.0.0.1</li>
                         <li>The port the server is listening on</li>
                         <li>Manual BTLE: BTLE connections are established manually</li>
+                        <li>Autoreconnect BTLE: automatic reconnection of lost BTLE connections</li>
                     </ul>
 
                     <p></p>
@@ -89,7 +90,9 @@
                     <h3>
                         Using the server
                     </h3>
-
+                    
+                    <h4>Connecting an E4</h4>
+                    <p></p>
                     <p>You will see the default view of the server, click the "Start" button.</p>
 
                     <p>If the dongle is not connected or there is a problem with communication, (i.e. missing drivers), the discovery won't start and the message "Dongle not connected" is displayed at the bottom.</p>
@@ -113,7 +116,25 @@
                         <li>When you want to stop streaming from a device, simply switch off your E4 and it will be disconnected.</li>
                     </ol>
                     <p></p>
+                    
+                    <h4>Connecting a TCP Client and Start Receiving Data</h4>
+                    <p></p>
 
+                    <p>The following steps need to be taken in order to start receiving data:</p>
+                    
+                    <ol>
+                        <li>A TCP client establishes a connection to the E4 streaming server, using the configured connection parameters.</li>
+                        <li>The TCP client binds to a device connected over BTLE through the <a href="windows-streaming-server-commands.html#connect-device">device_connect</a> command.</li>
+                        <li>The bound TCP client subscribes to a channel with the <a href="windows-streaming-server-commands.html#subscribe-receive-data">device_subscribe</a> command.</li>
+                    </ol>
+                    
+                    <p>The TCP client will now start receiving the data in the format specified in <a href="windows-streaming-server-data.html">Data Streaming Packets</a>.</p>
+                    
+                    <h4>Autoreconnect BTLE</h4>
+                    <p></p>
+                    
+                    <p>When the "Autoreconnect BTLE" option is checked, the E4 streaming server will attempt to reconnect to devices that lost BTLE connection. Reasons for connection loss may be obstructions or too long distances between the device and the BTLE dongle, but also devices being turned off through the button. TCP clients that were bound to the reconnected device will continue to receive data according to their subscriptions after reconnection.</p>
+                    
                     <h3>
                         Running the Server from Other Code or Scripts
                     </h3>
@@ -126,7 +147,7 @@
                     </div>
                     <p></p>
 
-                    <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution. Also, BTLE connections have to be handled manually through the commands.</p>
+                    <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution. Also, BTLE connections have to be handled manually through the commands and automatic reconnection is disabled.</p>
 
                     <h3>
                         Troubleshooting
