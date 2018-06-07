@@ -57,7 +57,12 @@
 
                     <p>The E4 streaming server allows to forward <strong>realtime data</strong> of multiple Empatica E4 devices to multiple TCP socket connections. Please note that each TCP connection can receive data from only one Empatica E4 device. To connect to multiple devices, multiple TCP connections are required.<br/>
                     The E4 streaming server is intended to make the data streams available to scripts and applications. However, the data streams can also be easily accessed e.g. for testing purposes with <a href="https://en.wikipedia.org/wiki/Telnet">Telnet</a>.</p>
-
+                    
+                    <figure>
+                        <img style="width: 600px;" src="images/E4_streaming_server_scheme.jpg"/>
+                        <figcaption><strong>Figure 1:</strong> Illustration of the connectivity and function of the E4 streaming server. On one side are E4s, connected over BTLE to the E4 streaming server using the BLED112 dongle. On the other side are TCP clients, connected to the E4 streaming server through TCP connections over the network. The lines originating from the E4s illustrate the data flow from the E4 through the E4 streaming server to the subscribed TCP client. For example, the data from the first E4 is forwarded by the E4 streaming server to the first and third TCP client.</figcaption>
+                    </figure>
+                    
                     <h3>Getting Started</h3>
                     <p></p>
                     
