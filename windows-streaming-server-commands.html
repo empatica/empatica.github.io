@@ -201,7 +201,7 @@
                     <p></p>
 
                     <p>The client sends a connection request to a specific device. The E4 streaming server binds the client connected by TCP to the device connected over BTLE. The bound client needs to subscribe to channels with the <a href="#subscribe-receive-data">device_subscribe</a> command in order to start receiving data.</p>
-                    <p>Each TCP connection is allowed to connect to one Empatica Device at a time. To receive data from multiple devices, multiple TCP connections are required. The TCP client remains bound to the device regardless of the status of the BTLE connection.</p>
+                    <p>Each TCP connection is allowed to connect to one Empatica Device at a time. To receive data from multiple devices, multiple TCP connections are required. The TCP client remains bound to the device regardless of the status of the BTLE connection. However, if the device has lost BTLE connectivity, only then TCP client has the possibility to bind to another E4 using the "device_connect" connection request. In this case the previous device will be unbound and subscriptions will be cleared.</p>
 
                     Client Request:
                     <p><code>device_connect &#60;DEVICE_ID&#62;</code></p>
