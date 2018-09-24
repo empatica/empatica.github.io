@@ -134,6 +134,8 @@
                     <p></p>
                     
                     <p>When the <strong>Autoreconnect BTLE</strong> option is checked, the E4 streaming server will attempt to reconnect to devices that lost BTLE connection. Reasons for connection loss may be obstructions or too long distances between the device and the BTLE dongle, but also devices being turned off through the button. TCP clients that were bound to the reconnected device will continue to receive data according to their subscriptions after reconnection.</p>
+
+                    <p>Additionally with <strong>Autoreconnect BTLE</strong> set, devices with a firmware version higher than 1.2.4.x will not turn off after BTLE connection is lost but instead will remain discoverable.</p>
                     
                     <h3>
                         Running the Server from Other Code or Scripts

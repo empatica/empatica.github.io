@@ -126,11 +126,14 @@
 
                     <p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and if allowed by the API key. If <strong>Manual BTLE</strong> is not set, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
 
+                    <p>An optional parameter can be specified, that defines a timeout for BTLE discovery after an accidental disconnection (e.g. device out of range). The device will stay on and be discoverable over BTLE for the specified amount of time. The timeout is an integer number defined in minutes and can be in the range 0-254, where 0 specifies an infinite timeout. If the optional parameter is left out there will be an infinite timeout if <strong>Autoreconnect BTLE</strong> is set, otherwise there will be no timeout.</p>
+                    <p>The optional timeout parameter only takes effect for devices with a firmware version higher than 1.2.4.x. Devices with lower firmware versions will automatically turn off after an accidental disconnection.</p>
+
                     Client Request:
-                    <p><code>device_connect_btle</code></p>
+                    <p><code>device_connect_btle &#60;DEVICE_ID&#62; [&#60;TIMEOUT&#62;]</code></p>
                     <div class="example">
                         Example:<br/>
-                        <code class="shell">device_connect_btle 9ff167</code>
+                        <code class="shell">device_connect_btle 9ff167 208</code>
                     </div>
                     <p></p>
                     Server Response:
@@ -345,6 +348,21 @@
                     <div class="example">
                         Example:<br/>
                         <code class="shell">R connection re-established to device 9ff167</code>
+                    </div>
+                    <p></p>
+
+                    <h4>
+                       Device Turned Off
+                    </h4>
+                    <p></p>
+                    
+                    <p>When a device is turned off by pressing the button, a device turned off message is sent to all TCP connections that are bound to the device. This message is only sent for devices with a firmware version higher than 1.2.4.x.</p>
+                    
+                    Server Message:
+                    <p><code>R device &#60;DEVICE_ID&#62; turned off via button</code></p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">R device 9ff167 turned off via button</code>
                     </div>
                     <p></p>
                     
