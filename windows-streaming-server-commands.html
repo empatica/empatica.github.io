@@ -95,7 +95,7 @@
                     </h4>
                     <p></p>
 
-                    <p>The client requests the list of Empatica E4 devices, that are in range and not connected over BTLE. The server responds with the number of discovered devices and a list of device info. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
+                    <p>The client requests the list of Empatica E4 devices, that are in range and not connected over BTLE. The server responds with the number of discovered devices and a list of device info. If <strong>Manual BTLE</strong> is not set, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
 
                     Client Request:
                     <p><code>device_discover_list</code></p>
@@ -124,7 +124,7 @@
                     </h4>
                     <p></p>
 
-                    <p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and allowed by the API key. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
+                    <p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and if allowed by the API key. If <strong>Manual BTLE</strong> is not set, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
 
                     Client Request:
                     <p><code>device_connect_btle</code></p>
@@ -152,7 +152,7 @@
                     <p>The client sends a BTLE disconnection request for a specific device. The server will disconnect the device from BTLE. This command terminates active connections as well as stops reconnection attempts to devices that have temporarily lost BTLE connection.</p>
 
                     Client Request:
-                    <p><code>device_disconnect_btle</code></p>
+                    <p><code>device_disconnect_btle &#60;DEVICE_ID&#62;</code></p>
                     <div class="example">
                         Example:<br/>
                         <code class="shell">device_disconnect_btle 9ff167</code>
@@ -226,7 +226,7 @@
                     </h4>
                     <p></p>
 
-                    <p>The client sends a device disconnection request. It will be disconnected from the currently connected device and close the TCP connection to the E4 streaming server. The device will remain connected to the E4 streaming server over BTLE.</p>
+                    <p>The client sends a device disconnection request. The client will be disconnected from the currently connected device and close the TCP connection to the E4 streaming server. The device will remain connected to the E4 streaming server over BTLE.</p>
 
                     Client Request:
                     <p><code>device_disconnect</code></p>
@@ -291,7 +291,7 @@
                     </h4>
                     <p></p>
 
-                    <p>To temporarily suspend and resume the data streaming (without disconnecting or switching off the device), the client sends a pause requests</p>
+                    <p>To temporarily suspend and resume the data streaming (without disconnecting or turning off the device), the client sends a pause requests</p>
 
                     Client Request:
                     <p><code>pause &#60;STATUS&#62;</code></p>
@@ -312,7 +312,7 @@
                     <p>To pause the stream specify <strong>ON</strong> and to resume <strong>OFF</strong>.</p>
                     
                     
-                    <h3 id="protocol-example">System Messages</h3>
+                    <h3>System Messages</h3>
                     <p></p>
                     
                     <p>In certain events the E4 streaming server sends an informative system message to the TCP connections.</p>

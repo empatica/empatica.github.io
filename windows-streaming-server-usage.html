@@ -107,13 +107,13 @@
                     <p>A text below the button tells you that the app is discovering E4s. Follow these steps to connect an E4:</p>
                     <ol>
                         <li>Make sure to keep the E4s not too close to each other and the dongle. The radios can saturate when the antennas are too close, resulting in communication problems.</li>
-                        <li>Switch on your E4. The led starts to blink green.</li>
+                        <li>Turn on your E4. The led starts to blink green.</li>
                         <li>After few seconds the E4 is visible in the list, showing the device ID and, once bound, the associated TCP connections.</li>
                         <li>If manual BTLE is disabled, the E4 is automatically connected. Otherwise a button is shown in the "Actions" row to allow for selective connection over BTLE.</li>
                         <li>While the connection is being established, the E4 led turns light blue. Finally, the led turns blue upon successful connection.</li>
-                        <li>After around 40 seconds, the led will be switched off in order to save battery.</li>
+                        <li>After around 40 seconds, the led will be turned off in order to save battery.</li>
                         <li>If you want to connect another E4 after the connection is established, then press the "Discover other E4 devices" button and start again from step 1.</li>
-                        <li>When you want to stop streaming from a device, simply switch off your E4 and it will be disconnected.</li>
+                        <li>When you want to stop streaming from a device, simply turn off your E4 and it will be disconnected.</li>
                     </ol>
                     <p></p>
                     
@@ -133,7 +133,7 @@
                     <h4>Autoreconnect BTLE</h4>
                     <p></p>
                     
-                    <p>When the "Autoreconnect BTLE" option is checked, the E4 streaming server will attempt to reconnect to devices that lost BTLE connection. Reasons for connection loss may be obstructions or too long distances between the device and the BTLE dongle, but also devices being turned off through the button. TCP clients that were bound to the reconnected device will continue to receive data according to their subscriptions after reconnection.</p>
+                    <p>When the <strong>Autoreconnect BTLE</strong> option is checked, the E4 streaming server will attempt to reconnect to devices that lost BTLE connection. Reasons for connection loss may be obstructions or too long distances between the device and the BTLE dongle, but also devices being turned off through the button. TCP clients that were bound to the reconnected device will continue to receive data according to their subscriptions after reconnection.</p>
                     
                     <h3>
                         Running the Server from Other Code or Scripts
@@ -165,7 +165,7 @@
                         <li>Launch the E4 streaming server</li>
                         <li>Check that the dongle is connected (you should see a "Dongle connected" text) at the bottom of the app's window</li>
                         <li>Click the "Start" button</li>
-                        <li>Switch on your E4</li>
+                        <li>Turn on your E4</li>
                     </ul>
                     <p></p>
                     <p>If the E4 streaming server can't connect to your E4 before memory mode starts and the led turns red, please contact our <a href="mailto:support@empatica.com">support</a> writing us your Api key and the serial number of the device you're using. You can find the serial number on the E4 close to sensor's led.</p>
