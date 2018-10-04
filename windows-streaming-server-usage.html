@@ -58,12 +58,14 @@
                     </h3>
 
                     <ul>
-                        <li>Windows PC running Windows 7 or Windows 8 with Visual C++ Redistributable Package installed (download from <a href="https://aka.ms/vs/15/release/VC_redist.x86.exe">here</a>)</li>
-                        <li>The E4 streaming server is currently working only with <a href="https://www.silabs.com/products/wireless/bluetooth/bluetooth-low-energy-modules/bled112-bluetooth-smart-dongle">Bluegiga Bluetooth Smart Dongle</a>.<br/>Driver/Installation guide can be downloaded <a href="https://www.silabs.com/documents/login/software/BLED112-Signed-Win-Drv.zip">here</a> (a Silicon Labs account is required)</li>
-                        <li>Empatica E4 Sensor with firmware build 0.0.1.505+ installed (present if E4 bought after May 2015)</li>
-                        <li>Empatica E4’s must be registered to the <a href="https://support.empatica.com/hc/en-us/articles/206397545-Develop-your-own-app">API key</a> owner to be accessible via the E4 streaming server</li>
+                        <li>Windows 7 or higher with Visual C++ Redistributable Package installed (download from <a href="https://aka.ms/vs/15/release/VC_redist.x86.exe">here</a>)</li>
+                        <li>The E4 streaming server is currently working only with <a href="https://www.silabs.com/products/wireless/bluetooth/bluetooth-low-energy-modules/bled112-bluetooth-smart-dongle">Bluegiga Bluetooth Smart Dongle</a>.<br/>A driver/installation guide can be downloaded <a href="https://www.silabs.com/documents/login/software/BLED112-Signed-Win-Drv.zip">here</a> (registration required)</li>
+                        <li>Empatica E4 with firmware build 0.0.1.505+ installed (present if E4 bought after May 2015)</li>
+                        <li>Empatica E4s must be registered to the <a href="https://support.empatica.com/hc/en-us/articles/206397545-Develop-your-own-app">API key</a> owner to be accessible via the E4 streaming server</li>
                     </ul>
-                    <p></p>
+
+                    <p class="notes">It is strongly advised to upgrade the Bluegiga Bluetooth Smart Dongle with the newest firmware in order to avoid connection issues. Additionally, the firmware can be modified to allow for a simultaneous connection of up to 7 E4s instead of only 3. For more information see <a href="#firmware-upgrade">BLE Dongle Firmware Upgrade</a>.</p>
+
                     <h3>
                         Installation
                     </h3>
@@ -150,6 +152,25 @@
                     <p></p>
 
                     <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution. Also, BTLE connections have to be handled manually through the commands and automatic reconnection is disabled.</p>
+
+                    <h3 id="firmware-upgrade">BLE Dongle Firmware Upgrade</h3>
+
+                    <p class="notes warning">
+                        The following steps only serve as an outline to upgrade the BLE dongle firmware.<br/>Please refer to <a href="https://www.silabs.com/community/wireless/bluetooth/knowledge-base.entry.html/2015/08/06/_how-to_update_the-saZT" target="_blank">this guide</a> to learn about the risks associated with a firmware upgrade and more details of the process.
+                    </p>
+
+                    <ol>
+                        <li>Download and install <code>Bluetooth Smart Software and SDK</code> (download from <a href="https://www.silabs.com/products/wireless/bluetooth/bluetooth-low-energy-modules/bled112-bluetooth-smart-dongle" target="_blank">here</a>, registration required).<br/>
+                        For the best experience download version 1.6.0 or higher.</li>
+                        <li>OPTIONAL: create a modified firmware to allow for simultaneous connection of up to 7 E4s
+                            <ol class="sub">
+                              <li>in the installation folder copy the contents of the usbcd example project (version 1.6.0: <code>example/dkble112/usbcdc</code>) to <code>bin/</code></li>
+                              <li>in the file config.xml change connections value field to 7</li>
+                              <li>open a cmd prompt in <code>bin/</code> and run <code>blegui2.exe</code>with the <code>.bgproj</code> file as argument to build a new firmware <code>.hex</code> file</li>
+                            </ol>
+                        </li>
+                        <li>running <code>blegui2.exe</code>, flash the modified firmware or the firmware from the usbcd example project (version 1.6.0: <code>example/dkble112/usbcdc</code>)</li>
+                    </ol>
 
                     <h3>
                         Troubleshooting
