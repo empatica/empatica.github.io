@@ -58,7 +58,7 @@
                     </h3>
 
 
-                    <p>Messages are ASCII strings terminated with a newline (in Windows '\r\n') character. Some commands have parameters, which are separated by spaces.</p>
+                    <p>Messages are ASCII strings terminated with a newline (in Windows '\r\n') character and encoded with UTF-8. Some commands have parameters, which are separated by spaces.</p>
 
                     <p>Client requests are in the following format</p>
 
@@ -95,7 +95,7 @@
                     </h4>
                     <p></p>
 
-                    <p>The client requests the list of Empatica E4 devices, that are in range and not connected over BTLE. The server responds with the number of discovered devices and a list of device info. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
+                    <p>The client requests the list of Empatica E4 devices, that are in range and not connected over BTLE. The server responds with the number of discovered devices and a list of device info. If <strong>Manual BTLE</strong> is not set, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
 
                     Client Request:
                     <p><code>device_discover_list</code></p>
@@ -124,13 +124,16 @@
                     </h4>
                     <p></p>
 
-                    <p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and allowed by the API key. If the E4 streaming server is not configured with manual BTLE, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
+                    <p>The client sends a BTLE connection request for a specific device. The server will connect to the device over BTLE if it has been discovered and if allowed by the API key. If <strong>Manual BTLE</strong> is not set, this command is not needed since discovery and connection over BTLE are handled automatically.</p>
+
+                    <p>An optional parameter can be specified, that defines a timeout for BTLE discovery after an accidental disconnection (e.g. device out of range). The device will stay on and be discoverable over BTLE for the specified amount of time. The timeout is an integer number defined in minutes and can be in the range 0-254, where 0 specifies an infinite timeout. If the optional parameter is left out there will be an infinite timeout if <strong>Autoreconnect BTLE</strong> is set, otherwise there will be no timeout.</p>
+                    <p>The optional timeout parameter only takes effect for devices with a firmware version higher than 1.2.4.x. Devices with lower firmware versions will automatically turn off after an accidental disconnection.</p>
 
                     Client Request:
-                    <p><code>device_connect_btle</code></p>
+                    <p><code>device_connect_btle &#60;DEVICE_ID&#62; [&#60;TIMEOUT&#62;]</code></p>
                     <div class="example">
                         Example:<br/>
-                        <code class="shell">device_connect_btle 9ff167</code>
+                        <code class="shell">device_connect_btle 9ff167 208</code>
                     </div>
                     <p></p>
                     Server Response:
@@ -141,6 +144,31 @@
                     <div class="example">
                         Example:<br/>
                         <code class="shell">R device_connect_btle ERR The device has not been discovered yet</code>
+                    </div>
+                    <p></p>
+                    
+                    <h4>
+                        Disconnect Device from BTLE
+                    </h4>
+                    <p></p>
+
+                    <p>The client sends a BTLE disconnection request for a specific device. The server will disconnect the device from BTLE. This command terminates active connections as well as stops reconnection attempts to devices that have temporarily lost BTLE connection.</p>
+
+                    Client Request:
+                    <p><code>device_disconnect_btle &#60;DEVICE_ID&#62;</code></p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">device_disconnect_btle 9ff167</code>
+                    </div>
+                    <p></p>
+                    Server Response:
+                    <p>
+                        <code>R device_disconnect_btle OK</code><br/>
+                        <code>R device_disconnect_btle ERR &#60;reason&#62;</code>
+                    </p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">R device_disconnect_btle ERR The device is not connected over btle</code>
                     </div>
                     <p></p>
 
@@ -175,9 +203,8 @@
                     </h4>
                     <p></p>
 
-                    <ol><li>The client sends a connection request to a specific device.</li>
-                        <li>Each TCP connection is allowed to connect to one Empatica Device at a time.</li>
-                        <li>To connect to multiple devices, multiple TCP connections are required.</li></ol>
+                    <p>The client sends a connection request to a specific device. The E4 streaming server binds the client connected by TCP to the device connected over BTLE. The bound client needs to subscribe to channels with the <a href="#subscribe-receive-data">device_subscribe</a> command in order to start receiving data.</p>
+                    <p>Each TCP connection is allowed to connect to one Empatica Device at a time. To receive data from multiple devices, multiple TCP connections are required. The TCP connection remains bound to the device regardless of the status of the BTLE connection. However, if the device has lost BTLE connectivity, only then TCP connection has the possibility to bind to another E4 using the "device_connect" connection request. In this case the previous device will be unbound and subscriptions will be cleared.</p>
 
                     Client Request:
                     <p><code>device_connect &#60;DEVICE_ID&#62;</code></p>
@@ -202,7 +229,7 @@
                     </h4>
                     <p></p>
 
-                    <p>The client sends a device disconnection request. It will be disconnected from the currently connected device and close the TCP connection.</p>
+                    <p>The client sends a device disconnection request. The client will be disconnected from the currently connected device and close the TCP connection to the E4 streaming server. The device will remain connected to the E4 streaming server over BTLE.</p>
 
                     Client Request:
                     <p><code>device_disconnect</code></p>
@@ -222,7 +249,8 @@
                     </h4>
                     <p></p>
 
-                    <p>To start or stop receiving data from a given stream, the client sends a data subscription requests specifying the desired stream.</p>
+                    <p>To start or stop receiving data from a given stream, the client sends a data subscription requests specifying the desired stream. The client needs to be first bound to a device with the <a href="#connect-device">device_connect</a> command.</p>
+                    <p>Subscriptions persist independent of the BTLE connection status of the device.</p>
 
                     Client Request:
                     <p><code>device_subscribe &#60;STREAM&#62; &#60;STATUS&#62;</code></p>
@@ -266,7 +294,7 @@
                     </h4>
                     <p></p>
 
-                    <p>To temporarily suspend and resume the data streaming (without disconnecting or switching off the device), the client sends a pause requests</p>
+                    <p>To temporarily suspend and resume the data streaming (without disconnecting or turning off the device), the client sends a pause requests</p>
 
                     Client Request:
                     <p><code>pause &#60;STATUS&#62;</code></p>
@@ -285,6 +313,59 @@
                     <p></p>
 
                     <p>To pause the stream specify <strong>ON</strong> and to resume <strong>OFF</strong>.</p>
+                    
+                    
+                    <h3>System Messages</h3>
+                    <p></p>
+                    
+                    <p>In certain events the E4 streaming server sends an informative system message to the TCP connections.</p>
+                    
+                    <h4>
+                       BTLE Connection Lost
+                    </h4>
+                    <p></p>
+                    
+                    <p>When the E4 streaming server loses connection to a device over BTLE, a disconnection message is sent to all TCP connections that are bound to the device.</p>
+                    
+                    Server Message:
+                    <p><code>R connection lost to device &#60;DEVICE_ID&#62;</code></p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">R connection lost to device 9ff167</code>
+                    </div>
+                    <p></p>
+                    
+                    
+                    <h4>
+                       BTLE Connection Re-Established
+                    </h4>
+                    <p></p>
+                    
+                    <p>When a previously connected device is connected again over BTLE to the E4 streaming server, a connection re-established message is sent to all TCP connections that are bound to the device. This message is sent independent of the setting <strong>Autoreconnect BTLE</strong> and of how the BTLE connection to the device was dropped.</p>
+                    
+                    Server Message:
+                    <p><code>R connection re-established to device &#60;DEVICE_ID&#62;</code></p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">R connection re-established to device 9ff167</code>
+                    </div>
+                    <p></p>
+
+                    <h4>
+                       Device Turned Off
+                    </h4>
+                    <p></p>
+                    
+                    <p>When a device is turned off by pressing the button, a device turned off message is sent to all TCP connections that are bound to the device. This message is only sent for devices with a firmware version higher than 1.2.4.x.</p>
+                    
+                    Server Message:
+                    <p><code>R device &#60;DEVICE_ID&#62; turned off via button</code></p>
+                    <div class="example">
+                        Example:<br/>
+                        <code class="shell">R device 9ff167 turned off via button</code>
+                    </div>
+                    <p></p>
+                    
 
                     <h3 id="protocol-example">Protocol Example (no Manual BTLE)</h3>
                     <p></p>

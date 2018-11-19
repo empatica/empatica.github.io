@@ -58,12 +58,14 @@
                     </h3>
 
                     <ul>
-                        <li>Windows PC running Windows 7 or Windows 8 with Visual C++ Redistributable Package installed (download from <a href="http://www.microsoft.com/en-us/download/details.aspx?id=40784">here</a>)</li>
-                        <li>The E4 streaming server is currently working only with <a href="https://www.silabs.com/products/wireless/bluetooth/bluetooth-low-energy-modules/bled112-bluetooth-smart-dongle">Bluegiga Bluetooth Smart Dongle</a>.<br/>Driver/Installation guide can be downloaded <a href="https://www.silabs.com/documents/login/software/BLED112-Signed-Win-Drv.zip">here</a> (a Silicon Labs account is required)</li>
-                        <li>Empatica E4 Sensor with firmware build 0.0.1.505+ installed (present if E4 bought after May 2015)</li>
-                        <li>Empatica E4’s must be registered to the <a href="https://support.empatica.com/hc/en-us/articles/206397545-Develop-your-own-app">API key</a> owner to be accessible via the E4 streaming server</li>
+                        <li>Windows 7 or higher with Visual C++ Redistributable Package installed (download from <a href="https://aka.ms/vs/15/release/VC_redist.x86.exe">here</a>)</li>
+                        <li>The E4 streaming server is currently working only with <a href="https://www.silabs.com/products/wireless/bluetooth/bluetooth-low-energy-modules/bled112-bluetooth-smart-dongle">Bluegiga Bluetooth Smart Dongle</a>.<br/>A driver/installation guide can be downloaded <a href="https://www.silabs.com/documents/login/software/BLED112-Signed-Win-Drv.zip">here</a> (registration required)</li>
+                        <li>Empatica E4 with firmware build 0.0.1.505+ installed (present if E4 bought after May 2015)</li>
+                        <li>Empatica E4s must be registered to the <a href="https://support.empatica.com/hc/en-us/articles/206397545-Develop-your-own-app">API key</a> owner to be accessible via the E4 streaming server</li>
                     </ul>
-                    <p></p>
+
+                    <p class="notes">It is strongly advised to upgrade the Bluegiga Bluetooth Smart Dongle with the newest firmware in order to avoid connection issues. Additionally, the firmware can be modified to allow for a simultaneous connection of up to 7 E4s instead of only 3. For more information see <a href="#firmware-upgrade">BLE Dongle Firmware Upgrade</a>.</p>
+
                     <h3>
                         Installation
                     </h3>
@@ -81,6 +83,7 @@
                         <li>The IP address the server bind to and clients have to connect to, e.g. 127.0.0.1</li>
                         <li>The port the server is listening on</li>
                         <li>Manual BTLE: BTLE connections are established manually</li>
+                        <li>Autoreconnect BTLE: automatic reconnection of lost BTLE connections</li>
                     </ul>
 
                     <p></p>
@@ -89,7 +92,9 @@
                     <h3>
                         Using the server
                     </h3>
-
+                    
+                    <h4>Connecting an E4</h4>
+                    <p></p>
                     <p>You will see the default view of the server, click the "Start" button.</p>
 
                     <p>If the dongle is not connected or there is a problem with communication, (i.e. missing drivers), the discovery won't start and the message "Dongle not connected" is displayed at the bottom.</p>
@@ -104,16 +109,36 @@
                     <p>A text below the button tells you that the app is discovering E4s. Follow these steps to connect an E4:</p>
                     <ol>
                         <li>Make sure to keep the E4s not too close to each other and the dongle. The radios can saturate when the antennas are too close, resulting in communication problems.</li>
-                        <li>Switch on your E4. The led starts to blink green.</li>
+                        <li>Turn on your E4. The led starts to blink green.</li>
                         <li>After few seconds the E4 is visible in the list, showing the device ID and, once bound, the associated TCP connections.</li>
                         <li>If manual BTLE is disabled, the E4 is automatically connected. Otherwise a button is shown in the "Actions" row to allow for selective connection over BTLE.</li>
                         <li>While the connection is being established, the E4 led turns light blue. Finally, the led turns blue upon successful connection.</li>
-                        <li>After around 40 seconds, the led will be switched off in order to save battery.</li>
+                        <li>After around 40 seconds, the led will be turned off in order to save battery.</li>
                         <li>If you want to connect another E4 after the connection is established, then press the "Discover other E4 devices" button and start again from step 1.</li>
-                        <li>When you want to stop streaming from a device, simply switch off your E4 and it will be disconnected.</li>
+                        <li>When you want to stop streaming from a device, simply turn off your E4 and it will be disconnected.</li>
                     </ol>
                     <p></p>
+                    
+                    <h4>Connecting a TCP Client and Start Receiving Data</h4>
+                    <p></p>
 
+                    <p>The following steps need to be taken in order to start receiving data:</p>
+                    
+                    <ol>
+                        <li>A TCP client establishes a connection to the E4 streaming server, using the configured connection parameters.</li>
+                        <li>The TCP client binds to a device connected over BTLE through the <a href="windows-streaming-server-commands.html#connect-device">device_connect</a> command.</li>
+                        <li>The bound TCP client subscribes to a channel with the <a href="windows-streaming-server-commands.html#subscribe-receive-data">device_subscribe</a> command.</li>
+                    </ol>
+                    
+                    <p>The TCP client will now start receiving the data in the format specified in <a href="windows-streaming-server-data.html">Data Streaming Packets</a>.</p>
+                    
+                    <h4>Autoreconnect BTLE</h4>
+                    <p></p>
+                    
+                    <p>When the <strong>Autoreconnect BTLE</strong> option is checked, the E4 streaming server will attempt to reconnect to devices that lost BTLE connection. Reasons for connection loss may be obstructions or too long distances between the device and the BTLE dongle, but also devices being turned off through the button. TCP clients that were bound to the reconnected device will continue to receive data according to their subscriptions after reconnection.</p>
+
+                    <p>Additionally with <strong>Autoreconnect BTLE</strong> set, devices with a firmware version higher than 1.2.4.x will not turn off after BTLE connection is lost but instead will remain discoverable.</p>
+                    
                     <h3>
                         Running the Server from Other Code or Scripts
                     </h3>
@@ -126,7 +151,26 @@
                     </div>
                     <p></p>
 
-                    <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution. Also, BTLE connections have to be handled manually through the commands.</p>
+                    <p>When running the E4 streaming server without GUI, the settings won't be saved and are only active during this execution. Also, BTLE connections have to be handled manually through the commands and automatic reconnection is disabled.</p>
+
+                    <h3 id="firmware-upgrade">BLE Dongle Firmware Upgrade</h3>
+
+                    <p class="notes warning">
+                        The following steps only serve as an outline to upgrade the BLE dongle firmware.<br/>Please refer to <a href="https://www.silabs.com/community/wireless/bluetooth/knowledge-base.entry.html/2015/08/06/_how-to_update_the-saZT" target="_blank">this guide</a> to learn about the risks associated with a firmware upgrade and more details of the process.
+                    </p>
+
+                    <ol>
+                        <li>Download and install <code>Bluetooth Smart Software and SDK</code> (download from <a href="https://www.silabs.com/products/wireless/bluetooth/bluetooth-low-energy-modules/bled112-bluetooth-smart-dongle" target="_blank">here</a>, registration required).<br/>
+                        For the best experience download version 1.6.0 or higher.</li>
+                        <li>OPTIONAL: create a modified firmware to allow for simultaneous connection of up to 7 E4s
+                            <ol class="sub">
+                              <li>in the installation folder copy the contents of the usbcd example project (version 1.6.0: <code>example/dkble112/usbcdc</code>) to <code>bin/</code></li>
+                              <li>in the file config.xml change connections value field to 7</li>
+                              <li>open a cmd prompt in <code>bin/</code> and run <code>blegui2.exe</code>with the <code>.bgproj</code> file as argument to build a new firmware <code>.hex</code> file</li>
+                            </ol>
+                        </li>
+                        <li>running <code>blegui2.exe</code>, flash the modified firmware or the firmware from the usbcd example project (version 1.6.0: <code>example/dkble112/usbcdc</code>)</li>
+                    </ol>
 
                     <h3>
                         Troubleshooting
@@ -144,7 +188,7 @@
                         <li>Launch the E4 streaming server</li>
                         <li>Check that the dongle is connected (you should see a "Dongle connected" text) at the bottom of the app's window</li>
                         <li>Click the "Start" button</li>
-                        <li>Switch on your E4</li>
+                        <li>Turn on your E4</li>
                     </ul>
                     <p></p>
                     <p>If the E4 streaming server can't connect to your E4 before memory mode starts and the led turns red, please contact our <a href="mailto:support@empatica.com">support</a> writing us your Api key and the serial number of the device you're using. You can find the serial number on the E4 close to sensor's led.</p>

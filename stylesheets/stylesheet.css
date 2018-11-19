@@ -244,6 +244,14 @@ ul, ol, dl {
   margin-bottom: 20px;
 }
 
+ol.sub {
+  margin-bottom: 0;
+}
+
+ol.sub li {
+  list-style: lower-latin;
+}
+
 figure {
     margin: 30px;
 }
