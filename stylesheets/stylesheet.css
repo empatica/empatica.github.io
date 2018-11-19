@@ -252,6 +252,20 @@ ol.sub li {
   list-style: lower-latin;
 }
 
+figure {
+    margin: 30px;
+}
+
+figure img {
+    display: block;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+figcaption {
+    padding: 10px;
+}
 
 /* COMMON STYLES */
 
