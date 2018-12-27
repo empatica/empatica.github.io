@@ -48,7 +48,7 @@
                     <p><a href="/">E4 for Developers</a> > <a href="windows-streaming-server.html">E4 streaming server</a> > Using E4 streaming server</p>
                     <h1>Using E4 streaming server</h1>
                     <h2>Running on Windows</h2>
-                    <h6>Updated May, 2018</h6>
+                    <h6>Updated December, 2018</h6>
                 </header>
 
                 <section id="main_content">
@@ -76,7 +76,7 @@
                         Configuration
                     </h3>
 
-                    <p>The first time you start the server you will see the settings panel that allows you to set:</p>
+                    <p>The first time you start the E4 streaming server the settings need to be adjusted. These are reachable through the button in the upper right corner and contains the following configurations:</p>
 
                     <ul>
                         <li>Your Empatica API Key (you can find yours <a href="https://www.empatica.com/connect/developer.php">here</a>, if you don't have one check this <a href="https://support.empatica.com/hc/en-us/articles/206397545-Develop-your-own-app">support article</a></li>
@@ -87,7 +87,7 @@
                     </ul>
 
                     <p></p>
-                    <p>Click the "Save" button after the configurations are made.</p>
+                    <p>Click the "Apply" button after the configurations are made.</p>
 
                     <h3>
                         Using the server
@@ -95,18 +95,11 @@
                     
                     <h4>Connecting an E4</h4>
                     <p></p>
-                    <p>You will see the default view of the server, click the "Start" button.</p>
+                    <p>If the dongle is connected and ready to use, the E4 streaming server will automatically discover and connect to E4 devices within Bluetooth range.</p>
 
-                    <p>If the dongle is not connected or there is a problem with communication, (i.e. missing drivers), the discovery won't start and the message "Dongle not connected" is displayed at the bottom.</p>
+                    <p>If the dongle is not connected or there is a problem with communication (e.g. missing drivers), the discovery won't start and an indication is given to connect the BLE dongle.</p>
 
-                    <p>If the dongle is not connected, plug it in your PC and press the "Refresh" button placed in the bottom left corner. The server will start to:</p>
-
-                    <ul>
-                        <li>Discover and connect to the E4 device within Bluetooth range.</li>
-                        <li>Listen to commands on the address and port specified in the settings panel.</li>
-                    </ul>
-
-                    <p>A text below the button tells you that the app is discovering E4s. Follow these steps to connect an E4:</p>
+                    <p>Once the E4 streaming server is discovering, follow these steps to connect an E4:</p>
                     <ol>
                         <li>Make sure to keep the E4s not too close to each other and the dongle. The radios can saturate when the antennas are too close, resulting in communication problems.</li>
                         <li>Turn on your E4. The led starts to blink green.</li>
