@@ -44,8 +44,8 @@
       <div class="inner">
 
         <header>
-          <p><a href="/">E4 for Developers</a> > E4 link SDK</p>
-          <h1>for Android SDK</h1>
+          <p><a href="/">E4 for Developers</a> E4 link SDK</p>
+          <h1>for Android</h1>
         </header>
 
         <section id="main_content">
@@ -53,11 +53,13 @@
             <a id="introduction-requirements" class="anchor" href="#introduction-requirements" aria-hidden="true"></a>Introduction and requirements
           </h2>
 
-          <p>The EmpaLink API allows you to build Android applications that can communicate with Empatica E4 and Empatica E3 devices.</p>
+          <p>The E4 link API allows you to build Android applications that can communicate with Empatica E4</p>
 
-          <p>First of all, you need to make sure your phone runs Android <strong> 4.4 KitKat (API level 19) or higher</strong>. Android 4.3 doesn't offer a stable enough connection, while previous versions don't support Bluetooth 4.0 (BLE) at all, and, therefore, are not <strong>compatible</strong> with the Empatica API.</p>
+          <p>First of all, you need to make sure your phone runs at least Android <strong> 4.4 KitKat (API level 19)</strong>. Android 6.0 or newer is recommended. This version is tested also on latest Android 9 and 10.
 
-          <p>This release is meant to be used with Android Studio 2.2 or later.</p>
+            NOTE: Android 4.3 doesn't offer a stable enough connection, while previous versions don't support Bluetooth 4.0 (BLE) at all, and, therefore, are not <strong>compatible</strong> with the Empatica API.</p>
+
+          <p>E4link 1.0.0 release is meant to be used with Android Studio 3.5 or later.</p>
 
           <p>Once equipped with a supported phone, you need to navigate to <a href="https://www.empatica.com/connect/developer.php">Empatica Connect Developer Area</a> and request to become a developer. You will find your <strong>API</strong> key and all the download links there.</p>
 
@@ -67,7 +69,7 @@
 
           <p>EmpaLink has the following dependency:</p>
 
-          <li><a href="http://square.github.io/okhttp">Ok HTTP Client - version 2.5.0</a></li>
+          <li><a href="http://square.github.io/okhttp">Ok HTTP Client - version 2.7.5</a></li>
           <p></p>
           <h2>
             <a id="installation-instructions" class="anchor" href="#installation-instructions" aria-hidden="true"></a>Installation instructions
@@ -89,11 +91,11 @@
   <code>}</code>
 </pre>
 
-          <li><p>Copy <code>empalink-2.1.aar</code> in the folder <code>libs</code> in the <code>app</code> folder (or in the folder with the name of your app). If the folder doesn't exist, create it.</p></li>
+          <li><p>Copy <code>E4link-1.0.0.aar</code> in the folder <code>libs</code> in the <code>app</code> folder (or in the folder with the name of your app). If the folder doesn't exist, create it.</p></li>
           <li><p>Open your app build.gradle and, in the dependencies { ... } block, add the following line:</p>
 <pre>
-<code> compile 'com.squareup.okhttp:okhttp:2.5.0'</code>
-<code> compile 'com.empatica.empalink:empalink:2.1@aar'</code>
+<code> compile 'com.squareup.okhttp:okhttp:2.7.5'</code>
+<code> compile 'com.empatica.empalink:E4link:1.0.0@aar'</code>
 </pre>
           </li>
           <li><p>Make sure your <code>build.gradle</code> has a <code>minSdkVersion 19</code> (or higher) line</p></li>
